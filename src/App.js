@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { MapContainer, TileLayer } from "react-leaflet";
+
+import Map from "./Map";
+import MyLocation from "./Components/MyLocation";
+import { useRounting } from "./Map";
 
 function App() {
+  const position = [10.841172501968856, 106.75928730628947];
+  const [map, setMap] = useState(null);
+  const [rounting, setRounting] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Map>
+      <MapContainer
+        center={position}
+        zoom={13}
+        scrollWheelZoom={true}
+        whenCreated={map => {
+          setMap(map);
+          // map.locate();
+        }}
+      >
+        <MyLocation />
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+        />
+      </MapContainer>
+    </Map>
   );
 }
 
