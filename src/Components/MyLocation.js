@@ -20,7 +20,7 @@ const MyLocation = () => {
         .getPlan()
         .getWaypoints()
         .map(wp => wp.latLng);
-      //  map.removeControl(rounting);
+      map.removeControl(rounting);
       rounting
         .getPlan()
         .setWaypoints([...wPs, e.latlng])

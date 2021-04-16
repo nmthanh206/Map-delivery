@@ -3,7 +3,7 @@ import { MapContainer, TileLayer } from "react-leaflet";
 
 import Map from "./Map";
 import MyLocation from "./Components/MyLocation";
-import { useRounting } from "./Map";
+import { control } from "./Map";
 
 function App() {
   const position = [10.841172501968856, 106.75928730628947];
@@ -12,6 +12,12 @@ function App() {
 
   return (
     <Map>
+      <button
+        onClick={() => control.addTo(map)}
+        style={{ position: "absolute", top: "2px" }}
+      >
+        Find Route
+      </button>
       <MapContainer
         center={position}
         zoom={13}

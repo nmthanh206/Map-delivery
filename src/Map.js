@@ -5,7 +5,7 @@ import "lrm-google";
 
 const RoutingContext = React.createContext();
 
-const control = L.Routing.control({
+export const control = L.Routing.control({
   waypoints: [
     L.latLng(10.841172501968856, 106.75928730628947),
     L.latLng(10.847944564456817, 106.76160644370741),
@@ -20,9 +20,9 @@ const control = L.Routing.control({
       { color: "blue", opacity: 0.5, weight: 2 },
     ],
   },
-  // router: new L.Routing.OSRMv1({
-  //   serviceUrl: "//router.project-osrm.org/viaroute",
-  // }),
+  router: new L.Routing.OSRMv1({
+    serviceUrl: "//router.project-osrm.org/viaroute",
+  }),
   createMarker: function (i, wps, n) {
     console.log(wps);
     const marker = L.marker(wps.latLng, {
