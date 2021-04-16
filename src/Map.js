@@ -4,6 +4,7 @@ import "leaflet-routing-machine";
 import "lrm-google";
 
 const RoutingContext = React.createContext();
+
 const control = L.Routing.control({
   waypoints: [
     L.latLng(10.841172501968856, 106.75928730628947),
@@ -11,6 +12,7 @@ const control = L.Routing.control({
   ],
   routeWhileDragging: true,
   showAlternatives: true,
+
   altLineOptions: {
     styles: [
       { color: "black", opacity: 0.15, weight: 9 },
@@ -18,9 +20,12 @@ const control = L.Routing.control({
       { color: "blue", opacity: 0.5, weight: 2 },
     ],
   },
-  createMarker: function (i, waypoints, n) {
-    console.log(waypoints);
-    const marker = L.marker(waypoints.latLng, {
+  // router: new L.Routing.OSRMv1({
+  //   serviceUrl: "//router.project-osrm.org/viaroute",
+  // }),
+  createMarker: function (i, wps, n) {
+    console.log(wps);
+    const marker = L.marker(wps.latLng, {
       draggable: true,
       bounceOnAdd: true,
       bounceOnAddOptions: {
@@ -29,11 +34,21 @@ const control = L.Routing.control({
       },
     })
       .bindPopup("My location")
-      .openPopup();
+      .openPopup()
+      .on("contextmenu", e => {
+        const waypoints = control
+          .getPlan()
+          .getWaypoints()
+          .map(wp => wp.latLng);
+        const newWaypoints = waypoints.filter(
+          wp => JSON.stringify(wp) !== JSON.stringify(e.latlng)
+        );
+        control.getPlan().setWaypoints(newWaypoints);
+      });
+
     return marker;
   },
 });
-
 export function useRounting() {
   return useContext(RoutingContext);
 }
