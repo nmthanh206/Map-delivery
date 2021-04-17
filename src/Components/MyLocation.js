@@ -20,11 +20,9 @@ const MyLocation = () => {
         .getPlan()
         .getWaypoints()
         .map(wp => wp.latLng);
-      map.removeControl(rounting);
-      rounting
-        .getPlan()
-        .setWaypoints([...wPs, e.latlng])
-        .addTo(map);
+      // map.removeControl(rounting);
+      rounting.getPlan().setWaypoints([...wPs, e.latlng]);
+      // .addTo(map);
     },
     // contextmenu(e) {
     //   console.log(e.currentTarget);
