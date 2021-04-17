@@ -1,46 +1,33 @@
 import React from "react";
 import L from "leaflet";
 import { useMapEvents } from "react-leaflet";
-
+import { control } from "../Map";
 import { useRounting } from "../Map";
 const MyLocation = () => {
-  const rounting = useRounting();
-  console.log(rounting);
+  // const rounting = useRounting();
+  // console.log(rounting);
   const map = useMapEvents({
     locationfound(e) {
       console.count("Chay");
-      rounting.getPlan().setWaypoints([e.latlng]).addTo(map); //Co getPlan thì sẽ add vô map
+      control.getPlan().setWaypoints([e.latlng]).addTo(map); //Co getPlan thì sẽ add vô map
       //   rounting.addTo(map);      Tim Duong
       map.flyTo(e.latlng, map.getZoom());
     },
     click(e) {
       // console.log("old", rounting.getPlan().getWaypoints());
-      console.log(rounting.getPlan().getWaypoints(), e);
-      const wPs = rounting
+
+      const wPs = control
         .getPlan()
         .getWaypoints()
         .map(wp => wp.latLng);
       // map.removeControl(rounting);
-      setTimeout(
-        () => rounting.getPlan().setWaypoints([...wPs, e.latlng]),
-        100
-      );
+      setTimeout(() => {
+        control.getPlan().setWaypoints([...wPs, e.latlng]);
+        console.log(control.getPlan().getWaypoints());
+      }, 100);
       // rounting.getPlan().setWaypoints([...wPs, e.latlng]);
       // .addTo(map);
     },
-    // contextmenu(e) {
-    //   console.log(e.currentTarget);
-    //   const wPs = rounting
-    //     .getPlan()
-    //     .getWaypoints()
-    //     .map(wp => wp.latLng);
-    //   console.log("old", wPs);
-    //   const newWps = wPs.filter(wp => {
-    //     return JSON.stringify(wp) !== JSON.stringify(e.latlng);
-    //   });
-    //   console.log("new", newWps);
-    //   rounting.getPlan().setWaypoints(newWps).addTo(map);
-    // },
   });
 
   return null;

@@ -14,9 +14,13 @@ function App() {
     <Map>
       <button
         onClick={() => {
+          const wps = control
+            .getPlan()
+            .getWaypoints()
+            .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
+          control.getPlan().setWaypoints(wps);
           map.removeControl(control);
           control.options.autoRoute = true;
-
           control.addTo(map);
           control.show(); //show chi duong chi tiet
         }}
@@ -26,9 +30,10 @@ function App() {
       </button>
       <button
         onClick={() => {
-          // const nWp = control.getPlan().getWaypoints().length;
-          // control.spliceWaypoints(0, nWp);
+          control.hide();
           control.getPlan().setWaypoints(null);
+          // const [wp1, wp2] = control.getPlan().getWaypoints();
+          // control.getPlan().setWaypoints([wp1, wp2]);
         }}
         style={{ position: "absolute", top: "2px", left: "50px" }}
       >
@@ -43,7 +48,7 @@ function App() {
           // control.hide();
           control.addTo(map);
           control.hide(); //show chi duong chi tiet
-          // map.locate();
+          map.locate();
         }}
       >
         <MyLocation />

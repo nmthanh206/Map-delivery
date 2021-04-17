@@ -14,6 +14,7 @@ export const control = L.Routing.control({
     L.latLng(10.841172501968856, 106.75928730628947),
     L.latLng(10.847944564456817, 106.76160644370741),
   ],
+  show: false,
   routeWhileDragging: true,
   showAlternatives: true,
 
