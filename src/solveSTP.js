@@ -5,10 +5,10 @@ const costMatrix = [
   [3, 2, 0, 5],
   [4, 3, 5, 0],
 ];
-export async function solveSTP() {
+export async function solveSTP(points = costMatrix) {
   try {
-    const response = await axios.get(`http://localhost:3001/tsp`, {
-      points: costMatrix,
+    const response = await axios.post(`http://localhost:3001/tsp`, {
+      points: JSON.stringify(points),
     });
     console.log(response);
     return response;

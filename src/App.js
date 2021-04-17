@@ -8,10 +8,9 @@ import { solveSTP } from "./solveSTP";
 function App() {
   const position = [10.841172501968856, 106.75928730628947];
   const [map, setMap] = useState(null);
-  useEffect(() => {
-    solveSTP().then(res => console.log(res));
-  }, []);
-
+  // useEffect(() => {
+  //   solveSTP().then(res => console.log(res));
+  // }, []);
   return (
     <>
       <button
@@ -52,6 +51,7 @@ function App() {
           control.addTo(map);
           control.hide(); //show chi duong chi tiet
           // map.locate();
+          // solveSTP().then(res => console.log(res));
         }}
       >
         <MyLocation />
