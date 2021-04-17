@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 
 import MyLocation from "./Components/MyLocation";
 import { control } from "./Map";
 import SideBar from "./Components/SideBar/Sidebar";
-
+import { solveSTP } from "./solveSTP";
 function App() {
   const position = [10.841172501968856, 106.75928730628947];
   const [map, setMap] = useState(null);
+  useEffect(() => {
+    solveSTP().then(res => console.log(res));
+  }, []);
 
   return (
     <>
