@@ -15,6 +15,13 @@ const ps = [
   [10.827944564456817, 106.76150644370741],
 ];
 
+const costMatrix = [
+  [0, 1, 3, 4],
+  [1, 0, 2, 3],
+  [3, 2, 0, 5],
+  [4, 3, 5, 0],
+];
+
 function App() {
   const position = [10.841172501968856, 106.75928730628947];
   const [map, setMap] = useState(null);
@@ -30,10 +37,43 @@ function App() {
             .getWaypoints()
             .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
           control.getPlan().setWaypoints(wps);
-          map.removeControl(control);
-          control.options.autoRoute = true;
-          control.addTo(map);
-          control.show(); //show chi duong chi tiet
+          console.log(
+            control
+              .getPlan()
+              .getWaypoints()
+              .map(({ latLng }) => [latLng.lat, latLng.lng])
+          );
+          const pointsArray = control
+            .getPlan()
+            .getWaypoints()
+            .map(({ latLng }) => [latLng.lat, latLng.lng]);
+          const matrix = Matrix(pointsArray);
+          solveSTP(matrix).then(res => {
+            console.log(res);
+            const oldwp = control
+              .getPlan()
+              .getWaypoints()
+              .map(({ latLng }) => [latLng.lat, latLng.lng]);
+
+            console.log("old wp", oldwp);
+            const newwp = new Array(oldwp.length).fill(0);
+            let i = 0;
+            for (let i = 0; i < oldwp.length; i++) {
+              console.log(oldwp[res.data.result[i]]);
+              newwp[i] = oldwp[res.data.result[i]];
+            }
+            console.log("toa do moi", newwp);
+            control.getPlan().setWaypoints(newwp);
+            map.removeControl(control);
+            control.options.autoRoute = true;
+            control.addTo(map);
+            control.show(); //show chi duong chi tiet
+          });
+
+          // map.removeControl(control);
+          // control.options.autoRoute = true;
+          // control.addTo(map);
+          // control.show(); //show chi duong chi tiet
         }}
         style={{ position: "absolute", top: "2px" }}
       >
@@ -62,7 +102,11 @@ function App() {
           control.hide(); //show chi duong chi tiet
           // map.locate();
           // solveSTP().then(res => console.log(res));
-          console.log(Matrix(ps));
+          // const points = control
+          //   .getPlan()
+          //   .getWaypoints()
+          //   .map(({ latLng }) => [latLng.lat, latLng.lng]);
+          // console.log(points);
         }}
       >
         <MyLocation />
