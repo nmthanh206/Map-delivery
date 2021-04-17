@@ -1,15 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import L from "leaflet";
 import "leaflet-routing-machine";
 import "lrm-google";
 import { getAddress } from "./getAddress";
-const RoutingContext = React.createContext();
 
 // router: new L.Routing.OSRMv1({
 //   serviceUrl: "//router.project-osrm.org/viaroute",
 // }),
 
-let address;
 export const control = L.Routing.control({
   waypoints: [
     L.latLng(10.841172501968856, 106.75928730628947),
@@ -64,16 +62,3 @@ export const control = L.Routing.control({
   const distance = e.routes[0].summary.totalDistance;
   console.log("routing distance: " + distance);
 });
-export function useRounting() {
-  return useContext(RoutingContext);
-}
-
-const Map = ({ children }) => {
-  return (
-    <RoutingContext.Provider value={control}>
-      {children}
-    </RoutingContext.Provider>
-  );
-};
-
-export default Map;

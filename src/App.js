@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 
-import Map from "./Map";
 import MyLocation from "./Components/MyLocation";
 import { control } from "./Map";
 
 function App() {
   const position = [10.841172501968856, 106.75928730628947];
   const [map, setMap] = useState(null);
-  // const [rounting, setRounting] = useState(null);
 
   return (
-    <Map>
+    <>
       <button
         onClick={() => {
           const wps = control
@@ -45,7 +43,6 @@ function App() {
         scrollWheelZoom={true}
         whenCreated={map => {
           setMap(map);
-          // control.hide();
           control.addTo(map);
           control.hide(); //show chi duong chi tiet
           // map.locate();
@@ -57,7 +54,7 @@ function App() {
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
       </MapContainer>
-    </Map>
+    </>
   );
 }
 
