@@ -1,12 +1,12 @@
 import axios from "axios";
 
-import { Matrix } from "./test";
-const costMatrix = [
-  [0, 1, 3, 4],
-  [1, 0, 2, 3],
-  [3, 2, 0, 5],
-  [4, 3, 5, 0],
-];
+import { getMatrix } from "./getMatrix";
+// const costMatrix = [
+//   [0, 1, 3, 4],
+//   [1, 0, 2, 3],
+//   [3, 2, 0, 5],
+//   [4, 3, 5, 0],
+// ];
 // export async function solveSTP(points = costMatrix) {
 //   try {
 //     const response = await axios.post(`http://localhost:3001/tsp`, {
@@ -19,28 +19,22 @@ const costMatrix = [
 //   }
 // }
 
-export async function solveSTP(points = costMatrix, control, map) {
+export async function solveSTP(points, control, map) {
   try {
     const response = await axios.post(`http://localhost:3001/tsp`, {
       points: JSON.stringify(points),
     });
-    const wps = control
-      .getPlan()
-      .getWaypoints()
-      .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
-    control.getPlan().setWaypoints(wps);
-    console.log(
-      control
-        .getPlan()
-        .getWaypoints()
-        .map(({ latLng }) => [latLng.lat, latLng.lng])
-    );
+    console.log("best route", response.data.result);
+    // const wps = control
+    //   .getPlan()
+    //   .getWaypoints()
+    //   .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
+    // control.getPlan().setWaypoints(wps);
     const pointsArray = control
       .getPlan()
       .getWaypoints()
       .map(({ latLng }) => [latLng.lat, latLng.lng]);
-    const matrix = Matrix(pointsArray);
-
+    const matrix = getMatrix(pointsArray);
     const oldwp = control
       .getPlan()
       .getWaypoints()
@@ -59,7 +53,6 @@ export async function solveSTP(points = costMatrix, control, map) {
     control.options.autoRoute = true;
     control.addTo(map);
     control.show(); //show chi duong chi tiet
-
     return response;
   } catch (error) {
     console.error(error);

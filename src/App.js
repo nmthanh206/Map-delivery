@@ -4,8 +4,8 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import MyLocation from "./Components/MyLocation";
 import { control } from "./Map";
 import SideBar from "./Components/SideBar/Sidebar";
-import { solveSTP } from "./solveSTP";
-import { Matrix } from "./test";
+import { solveSTP } from "./Ulti/solveSTP";
+import { getMatrix } from "./Ulti/getMatrix";
 
 const ps = [
   [10.841172501968856, 106.75928732628947],
@@ -69,12 +69,16 @@ function App() {
           //   control.addTo(map);
           //   control.show(); //show chi duong chi tiet
           // });
-
+          const wps = control
+            .getPlan()
+            .getWaypoints()
+            .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
+          control.getPlan().setWaypoints(wps);
           const pointsArray = control
             .getPlan()
             .getWaypoints()
             .map(({ latLng }) => [latLng.lat, latLng.lng]);
-          const matrix = Matrix(pointsArray);
+          const matrix = getMatrix(pointsArray);
           solveSTP(matrix, control, map);
 
           // map.removeControl(control);
