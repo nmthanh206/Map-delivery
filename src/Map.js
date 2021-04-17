@@ -2,13 +2,14 @@ import React, { useContext } from "react";
 import L from "leaflet";
 import "leaflet-routing-machine";
 import "lrm-google";
-
+import { getAddress } from "./getAddress";
 const RoutingContext = React.createContext();
 
 // router: new L.Routing.OSRMv1({
 //   serviceUrl: "//router.project-osrm.org/viaroute",
 // }),
 
+let address;
 export const control = L.Routing.control({
   waypoints: [
     L.latLng(10.841172501968856, 106.75928730628947),
@@ -36,7 +37,13 @@ export const control = L.Routing.control({
         height: 800,
       },
     })
-      .bindPopup("My location")
+      .bindPopup(() => {
+        getAddress(wps.latLng.lat, wps.latLng.lng).then(res => {
+          console.log(res);
+          marker.bindPopup(res.data.display_name);
+        });
+        return "";
+      })
       .openPopup()
       .on("contextmenu", e => {
         const waypoints = control
@@ -47,7 +54,6 @@ export const control = L.Routing.control({
           wp => JSON.stringify(wp) !== JSON.stringify(e.latlng)
         );
         control.getPlan().setWaypoints(newWaypoints);
-
         //  control.spliceWaypoints(index, index + 1);
       });
 
