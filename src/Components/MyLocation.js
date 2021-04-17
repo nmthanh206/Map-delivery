@@ -21,7 +21,11 @@ const MyLocation = () => {
         .getWaypoints()
         .map(wp => wp.latLng);
       // map.removeControl(rounting);
-      rounting.getPlan().setWaypoints([...wPs, e.latlng]);
+      setTimeout(
+        () => rounting.getPlan().setWaypoints([...wPs, e.latlng]),
+        100
+      );
+      // rounting.getPlan().setWaypoints([...wPs, e.latlng]);
       // .addTo(map);
     },
     // contextmenu(e) {

@@ -24,8 +24,8 @@ export const control = L.Routing.control({
       { color: "blue", opacity: 0.5, weight: 2 },
     ],
   },
-  // autoRoute=true,
-  createMarker: function (i, wps, n) {
+  autoRoute: false,
+  createMarker: function (index, wps, n) {
     // console.log(wps);
     const marker = L.marker(wps.latLng, {
       draggable: true,
@@ -46,6 +46,8 @@ export const control = L.Routing.control({
           wp => JSON.stringify(wp) !== JSON.stringify(e.latlng)
         );
         control.getPlan().setWaypoints(newWaypoints);
+
+        //  control.spliceWaypoints(index, index + 1);
       });
 
     return marker;
