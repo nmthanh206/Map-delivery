@@ -5,6 +5,16 @@ import MyLocation from "./Components/MyLocation";
 import { control } from "./Map";
 import SideBar from "./Components/SideBar/Sidebar";
 import { solveSTP } from "./solveSTP";
+import { Matrix } from "./test";
+
+const ps = [
+  [10.841172501968856, 106.75928732628947],
+  [10.847944564456817, 106.76160644370741],
+  [10.847944364456817, 106.76160644370741],
+  [10.847944562456817, 106.76160644370741],
+  [10.827944564456817, 106.76150644370741],
+];
+
 function App() {
   const position = [10.841172501968856, 106.75928730628947];
   const [map, setMap] = useState(null);
@@ -52,6 +62,7 @@ function App() {
           control.hide(); //show chi duong chi tiet
           // map.locate();
           // solveSTP().then(res => console.log(res));
+          console.log(Matrix(ps));
         }}
       >
         <MyLocation />
