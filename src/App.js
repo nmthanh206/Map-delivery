@@ -3,6 +3,7 @@ import { MapContainer, TileLayer } from "react-leaflet";
 
 import MyLocation from "./Components/MyLocation";
 import { control } from "./Map";
+import SideBar from "./Components/SideBar/Sidebar";
 
 function App() {
   const position = [10.841172501968856, 106.75928730628947];
@@ -37,6 +38,8 @@ function App() {
       >
         Clear Points
       </button>
+      {/* <div className="map-bar"> */}
+      {/* <SideBar /> */}
       <MapContainer
         center={position}
         zoom={13}
@@ -54,6 +57,7 @@ function App() {
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
       </MapContainer>
+      {/* </div> */}
     </>
   );
 }

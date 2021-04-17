@@ -1,11 +1,6 @@
-import React from "react";
-import L from "leaflet";
 import { useMapEvents } from "react-leaflet";
 import { control } from "../Map";
-import { useRounting } from "../Map";
 const MyLocation = () => {
-  // const rounting = useRounting();
-  // console.log(rounting);
   const map = useMapEvents({
     locationfound(e) {
       console.count("Chay");
