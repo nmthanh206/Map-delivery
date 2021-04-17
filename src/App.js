@@ -32,43 +32,50 @@ function App() {
     <>
       <button
         onClick={() => {
-          const wps = control
-            .getPlan()
-            .getWaypoints()
-            .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
-          control.getPlan().setWaypoints(wps);
-          console.log(
-            control
-              .getPlan()
-              .getWaypoints()
-              .map(({ latLng }) => [latLng.lat, latLng.lng])
-          );
+          // const wps = control
+          //   .getPlan()
+          //   .getWaypoints()
+          //   .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
+          // control.getPlan().setWaypoints(wps);
+          // console.log(
+          //   control
+          //     .getPlan()
+          //     .getWaypoints()
+          //     .map(({ latLng }) => [latLng.lat, latLng.lng])
+          // );
+          // const pointsArray = control
+          //   .getPlan()
+          //   .getWaypoints()
+          //   .map(({ latLng }) => [latLng.lat, latLng.lng]);
+          // const matrix = Matrix(pointsArray);
+
+          // solveSTP(matrix).then(res => {
+          //   const oldwp = control
+          //     .getPlan()
+          //     .getWaypoints()
+          //     .map(({ latLng }) => [latLng.lat, latLng.lng]);
+
+          //   console.log("old wp", oldwp);
+          //   const newwp = new Array(oldwp.length).fill(0);
+          //   let i = 0;
+          //   for (let i = 0; i < oldwp.length; i++) {
+          //     console.log(oldwp[res.data.result[i]]);
+          //     newwp[i] = oldwp[res.data.result[i]];
+          //   }
+          //   console.log("toa do moi", newwp);
+          //   control.getPlan().setWaypoints(newwp);
+          //   map.removeControl(control);
+          //   control.options.autoRoute = true;
+          //   control.addTo(map);
+          //   control.show(); //show chi duong chi tiet
+          // });
+
           const pointsArray = control
             .getPlan()
             .getWaypoints()
             .map(({ latLng }) => [latLng.lat, latLng.lng]);
           const matrix = Matrix(pointsArray);
-          solveSTP(matrix).then(res => {
-            console.log(res);
-            const oldwp = control
-              .getPlan()
-              .getWaypoints()
-              .map(({ latLng }) => [latLng.lat, latLng.lng]);
-
-            console.log("old wp", oldwp);
-            const newwp = new Array(oldwp.length).fill(0);
-            let i = 0;
-            for (let i = 0; i < oldwp.length; i++) {
-              console.log(oldwp[res.data.result[i]]);
-              newwp[i] = oldwp[res.data.result[i]];
-            }
-            console.log("toa do moi", newwp);
-            control.getPlan().setWaypoints(newwp);
-            map.removeControl(control);
-            control.options.autoRoute = true;
-            control.addTo(map);
-            control.show(); //show chi duong chi tiet
-          });
+          solveSTP(matrix, control, map);
 
           // map.removeControl(control);
           // control.options.autoRoute = true;
