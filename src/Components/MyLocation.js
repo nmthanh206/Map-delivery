@@ -15,7 +15,7 @@ const MyLocation = () => {
     },
     click(e) {
       // console.log("old", rounting.getPlan().getWaypoints());
-
+      if (control.getPlan().getWaypoints().length >= 6) return;
       const wPs = control
         .getPlan()
         .getWaypoints()

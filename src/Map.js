@@ -38,6 +38,7 @@ export const control = L.Routing.control({
       },
     })
       .bindPopup(() => {
+        if (!marker.getPopup()) return marker.getPopup();
         getAddress(wps.latLng.lat, wps.latLng.lng).then(res => {
           console.log(res);
           marker.bindPopup(res.data.display_name);

@@ -48,7 +48,7 @@ function App() {
           // control.hide();
           control.addTo(map);
           control.hide(); //show chi duong chi tiet
-          map.locate();
+          // map.locate();
         }}
       >
         <MyLocation />
