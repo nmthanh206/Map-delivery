@@ -1,5 +1,7 @@
 import { getMatrix } from "./Ulti/getMatrix";
-
+import axios from "axios";
+const MY_TOKEN =
+  "pk.eyJ1IjoiY3VsaSIsImEiOiJja25uZXU0ZDAweTdiMnZtb3M2NHQ5aTRyIn0.NRnVfIe8taalu9iDd4fGPw";
 function getDistance(origin, destination) {
   // return distance in meters
   const lon1 = toRadian(origin[1]);
@@ -89,11 +91,26 @@ async function SolveSTP(control) {
   const pointsArray = control
     .getPlan()
     .getWaypoints()
-    .map(({ latLng }) => [latLng.lat, latLng.lng]);
-  const costMatrix = getMatrix(pointsArray);
+    .map(({ latLng }) => `${latLng.lng},${latLng.lat};`); //cai nay phai de nguoc lng lat moi fetch duoc
+  // console.log(pointsArray);
+  // console.log(pointsArray.toString().replaceAll(";,", ";"));
+  const points = pointsArray.toString().replaceAll(";,", ";").slice(0, -1);
+  // console.log(costMatrix);
+  const curb = Array(pointsArray.length).fill("curb").join(";");
+  const url = `https://api.mapbox.com/directions-matrix/v1/mapbox/driving/${points}?approaches=${curb}&access_token=${MY_TOKEN}`;
+  console.log(url);
+  const solution = await axios.get(url);
+  console.log(solution.data.durations);
+  // return;
+  // const costMatrix = getMatrix(pointsArray);
+  const costMatrix = solution.data.durations;
+  // const result2 = permutator(
+  //   Array.from(Array(pointsArray.length).keys())
+  // ).map(path => [...path]);
   const result2 = permutator(
-    Array.from(Array(pointsArray.length).keys())
-  ).map(path => [9, ...path]);
+    Array.from({ length: pointsArray.length - 1 }, (_, i) => i + 1)
+  ).map(path => [0, ...path]);
+  // console.log(result2);
   let min = Infinity;
   let index = 0;
   let pathCost = 0;

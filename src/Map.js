@@ -8,6 +8,7 @@ import { getAddress } from "./Ulti/getAddress";
 //   serviceUrl: "//router.project-osrm.org/viaroute",
 // }),
 
+//pk.eyJ1IjoiY3VsaSIsImEiOiJja25uZXU0ZDAweTdiMnZtb3M2NHQ5aTRyIn0.NRnVfIe8taalu9iDd4fGPw
 export const control = L.Routing.control({
   waypoints: [
     L.latLng(10.841172501968856, 106.75928730628947),
@@ -21,9 +22,9 @@ export const control = L.Routing.control({
   routeWhileDragging: false,
   autoRoute: false,
   useZoomParameter: false,
-  lineOptions: {
-    styles: [{ className: "animate" }], // Adding animate class
-  },
+  // lineOptions: {
+  //   styles: [{ className: "animate" }], // Adding animate class
+  // },
   altLineOptions: {
     styles: [
       { color: "black", opacity: 0.15, weight: 9 },

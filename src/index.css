@@ -32,7 +32,7 @@ code {
 /* path.leaflet-interactive.animate {
   stroke-dasharray: 1920;
   stroke-dashoffset: 1920;
-  animation: dash 10s linear 3s forwards;
+  animation: dash 9s linear 2s forwards;
 }
 
 @keyframes dash {

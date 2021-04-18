@@ -7,7 +7,7 @@ import SideBar from "./Components/SideBar/Sidebar";
 import { solveSTP } from "./Ulti/solveSTP";
 import { getMatrix } from "./Ulti/getMatrix";
 import { SolveSTP2 } from "./test2";
-
+import L from "leaflet";
 const ps = [
   [10.841172501968856, 106.75928732628947],
   [10.847944564456817, 106.76160644370741],
@@ -33,17 +33,17 @@ function App() {
     <>
       <button
         onClick={() => {
-          //    SolveSTP2(control);
+          SolveSTP2(control);
 
-          const wps = control
-            .getPlan()
-            .getWaypoints()
-            .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
-          control.getPlan().setWaypoints(wps);
-          control.addTo(map);
-          control.route();
-          console.log(control.getRouter());
-          control.show(); //show chi duong chi tiet
+          // const wps = control
+          //   .getPlan()
+          //   .getWaypoints()
+          //   .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
+          // control.getPlan().setWaypoints(wps);
+          // control.addTo(map);
+          // control.route();
+          // console.log(control.getRouter());
+          // control.show(); //show chi duong chi tiet
         }}
         style={{ position: "absolute", top: "2px" }}
       >
