@@ -1,3 +1,5 @@
+import { getMatrix } from "./Ulti/getMatrix";
+
 function getDistance(origin, destination) {
   // return distance in meters
   const lon1 = toRadian(origin[1]);
@@ -50,7 +52,45 @@ const result2 = permutator([0, 1, 2, 3]);
 // const newArrays = result2.map(x => ["vi tri", ...x]);
 // for (let oneArray of newArrays) console.log(oneArray);
 console.log(result2);
-function SolveSTP2() {
+
+// async function SolveSTP2() {
+//   let min = Infinity;
+//   let index = 0;
+//   let pathCost = 0;
+//   for (let i = 0; i < result2.length; i++) {
+//     pathCost = 0;
+//     for (let j = 0; j < result2[i].length - 1; j++) {
+//       let from = result2[i][j];
+//       let to = result2[i][j + 1];
+//       pathCost += costMatrix[from][to];
+//     }
+//     if (pathCost < min) {
+//       min = pathCost;
+//       index = i;
+//     }
+//   }
+//   return [result2[index], min];
+// }
+// const Solve = async () => {
+//   const result = await SolveSTP2();
+//   console.log(result);
+// };
+
+// Solve();
+// console.log("Tao truoc ne");
+
+async function SolveSTP(control) {
+  const wps = control
+    .getPlan()
+    .getWaypoints()
+    .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
+  control.getPlan().setWaypoints(wps);
+  const pointsArray = control
+    .getPlan()
+    .getWaypoints()
+    .map(({ latLng }) => [latLng.lat, latLng.lng]);
+  const matrix = getMatrix(pointsArray);
+  const result2 = permutator(Array.from(Array(pointsArray.length).keys()));
   let min = Infinity;
   let index = 0;
   let pathCost = 0;
@@ -68,4 +108,7 @@ function SolveSTP2() {
   }
   return [result2[index], min];
 }
-console.log(SolveSTP2());
+export const SolveSTP2 = async control => {
+  const result = await SolveSTP(control);
+  console.log(result);
+};

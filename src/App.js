@@ -48,13 +48,11 @@ function App() {
           //   .getWaypoints()
           //   .map(({ latLng }) => [latLng.lat, latLng.lng]);
           // const matrix = Matrix(pointsArray);
-
           // solveSTP(matrix).then(res => {
           //   const oldwp = control
           //     .getPlan()
           //     .getWaypoints()
           //     .map(({ latLng }) => [latLng.lat, latLng.lng]);
-
           //   console.log("old wp", oldwp);
           //   const newwp = new Array(oldwp.length).fill(0);
           //   let i = 0;
@@ -69,18 +67,17 @@ function App() {
           //   control.addTo(map);
           //   control.show(); //show chi duong chi tiet
           // });
-          const wps = control
-            .getPlan()
-            .getWaypoints()
-            .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
-          control.getPlan().setWaypoints(wps);
-          const pointsArray = control
-            .getPlan()
-            .getWaypoints()
-            .map(({ latLng }) => [latLng.lat, latLng.lng]);
-          const matrix = getMatrix(pointsArray);
-          solveSTP(matrix, control, map);
-
+          // const wps = control
+          //   .getPlan()
+          //   .getWaypoints()
+          //   .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
+          // control.getPlan().setWaypoints(wps);
+          // const pointsArray = control
+          //   .getPlan()
+          //   .getWaypoints()
+          //   .map(({ latLng }) => [latLng.lat, latLng.lng]);
+          // const matrix = getMatrix(pointsArray);
+          // solveSTP(matrix, control, map);
           // map.removeControl(control);
           // control.options.autoRoute = true;
           // control.addTo(map);
