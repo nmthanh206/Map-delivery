@@ -41,17 +41,18 @@ const permutator = inputArr => {
   return result;
 };
 
-const costMatrix = [
-  [0, 1, 3, 4],
-  [1, 0, 2, 3],
-  [3, 2, 0, 5],
-  [4, 3, 5, 0],
-];
-const result2 = permutator([0, 1, 2, 3]);
+// const costMatrix = [
+//   [0, 1, 3, 4],
+//   [1, 0, 2, 3],
+//   [3, 2, 0, 5],
+//   [4, 3, 5, 0],
+// ];
+// const result2 = permutator([0, 1, 2, 3]);
 //console.log(result2.map(x=>[0,...x]));
 // const newArrays = result2.map(x => ["vi tri", ...x]);
 // for (let oneArray of newArrays) console.log(oneArray);
-console.log(result2);
+
+//console.log(result2);
 
 // async function SolveSTP2() {
 //   let min = Infinity;
@@ -89,7 +90,7 @@ async function SolveSTP(control) {
     .getPlan()
     .getWaypoints()
     .map(({ latLng }) => [latLng.lat, latLng.lng]);
-  const matrix = getMatrix(pointsArray);
+  const costMatrix = getMatrix(pointsArray);
   const result2 = permutator(Array.from(Array(pointsArray.length).keys()));
   let min = Infinity;
   let index = 0;
