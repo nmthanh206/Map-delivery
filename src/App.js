@@ -33,7 +33,7 @@ function App() {
     <>
       <button
         onClick={() => {
-          SolveSTP2(control);
+          SolveSTP2(control, map);
 
           // const wps = control
           //   .getPlan()

@@ -82,7 +82,7 @@ const permutator = inputArr => {
 // Solve();
 // console.log("Tao truoc ne");
 
-async function SolveSTP(control) {
+async function SolveSTP(control, map) {
   const wps = control
     .getPlan()
     .getWaypoints()
@@ -108,9 +108,9 @@ async function SolveSTP(control) {
   //   Array.from(Array(pointsArray.length).keys())
   // ).map(path => [...path]);
   const result2 = permutator(
-    Array.from({ length: pointsArray.length - 1 }, (_, i) => i + 1)
-  ).map(path => [0, ...path]);
-  // console.log(result2);
+    Array.from({ length: pointsArray.length - 1 }, (_, i) => i + 1) //- 1 o day
+  ).map(path => [0, ...path]); //them 0 dau o day path => [0, ...path]
+  console.log(result2);
   let min = Infinity;
   let index = 0;
   let pathCost = 0;
@@ -126,6 +126,24 @@ async function SolveSTP(control) {
       index = i;
     }
   }
+
+  const oldwp = control
+    .getPlan()
+    .getWaypoints()
+    .map(({ latLng }) => [latLng.lat, latLng.lng]);
+
+  console.log("old wp", oldwp);
+  const newwp = new Array(oldwp.length).fill(0);
+  let i = 0;
+  for (let i = 0; i < oldwp.length; i++) {
+    console.log(oldwp[result2[index][i]]);
+    newwp[i] = oldwp[result2[index][i]];
+  }
+  console.log("toa do moi", newwp);
+  control.getPlan().setWaypoints(newwp);
+  control.show(); //show chi duong chi tiet
+  control.route();
+  console.log(control.getRouter());
   return [result2[index], min];
 }
 export const SolveSTP2 = async control => {
