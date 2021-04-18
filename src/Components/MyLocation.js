@@ -9,6 +9,11 @@ const MyLocation = () => {
       map.flyTo(e.latlng, map.getZoom());
     },
     click(e) {
+      const wps = control
+        .getPlan()
+        .getWaypoints()
+        .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
+      control.getPlan().setWaypoints(wps);
       // console.log("old", rounting.getPlan().getWaypoints());
       if (control.getPlan().getWaypoints().length >= 6) return;
       const wPs = control

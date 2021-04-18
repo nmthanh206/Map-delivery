@@ -91,7 +91,9 @@ async function SolveSTP(control) {
     .getWaypoints()
     .map(({ latLng }) => [latLng.lat, latLng.lng]);
   const costMatrix = getMatrix(pointsArray);
-  const result2 = permutator(Array.from(Array(pointsArray.length).keys()));
+  const result2 = permutator(
+    Array.from(Array(pointsArray.length).keys())
+  ).map(path => [9, ...path]);
   let min = Infinity;
   let index = 0;
   let pathCost = 0;

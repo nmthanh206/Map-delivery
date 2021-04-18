@@ -33,16 +33,19 @@ function App() {
     <>
       <button
         onClick={() => {
-          SolveSTP2(control);
+          //    SolveSTP2(control);
           const wps = control
             .getPlan()
             .getWaypoints()
             .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
           control.getPlan().setWaypoints(wps);
-
-          map.removeControl(control);
-          control.options.autoRoute = true;
+          // map.removeControl(control);
+          // control.options.autoRoute = true;
           control.addTo(map);
+
+          control.route();
+          console.log(control.getRouter());
+          // control.getPlan().route = false;
           control.show(); //show chi duong chi tiet
         }}
         style={{ position: "absolute", top: "2px" }}
