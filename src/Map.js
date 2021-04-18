@@ -17,6 +17,13 @@ export const control = L.Routing.control({
   routeWhileDragging: true,
   showAlternatives: true,
   addWaypoints: true,
+  // routeDragTimeout: 250,
+  routeWhileDragging: false,
+  autoRoute: false,
+  useZoomParameter: false,
+  lineOptions: {
+    styles: [{ className: "animate" }], // Adding animate class
+  },
   altLineOptions: {
     styles: [
       { color: "black", opacity: 0.15, weight: 9 },
@@ -24,8 +31,7 @@ export const control = L.Routing.control({
       { color: "blue", opacity: 0.5, weight: 2 },
     ],
   },
-  autoRoute: false,
-  routeWhileDragging: false,
+
   createMarker: function (index, wps, n) {
     // console.log(wps);
     const marker = L.marker(wps.latLng, {
