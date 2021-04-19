@@ -10,13 +10,9 @@ const SideBar = ({ points, map }) => {
   return (
     <div className="SupportToolsArea">
       <form>
-        <h4>INPUT LOCATION:</h4>
-        <input type="text" id="Location" />
-        <input type="button" value="SAVE" id="Save" className="button" />
-        <br />
-        <br />
         <h4>LOCATION IN JOURNEY:</h4>
-        {listLocationDetails}
+        <div className="box"> {listLocationDetails}</div>
+
         <input type="button" value="START" id="Start" className="button" />
       </form>
     </div>

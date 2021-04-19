@@ -89,6 +89,7 @@ export const createMarker = setPoints => {
     const marker = L.marker(wps.latLng, {
       draggable: true,
       bounceOnAdd: true,
+      // icon: L.icon({ iconUrl: "./my-icon.png", iconSize: [38, 95] }),
       bounceOnAddOptions: {
         duration: 1000,
         height: 800,
