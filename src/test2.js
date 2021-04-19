@@ -129,23 +129,23 @@ async function SolveSTP(control, map) {
     }
   }
 
-  // const oldwp = control
-  //   .getPlan()
-  //   .getWaypoints()
-  //   .map(({ latLng }) => [latLng.lat, latLng.lng]);
+  const oldwp = control
+    .getPlan()
+    .getWaypoints()
+    .map(({ latLng }) => [latLng.lat, latLng.lng]);
 
-  // console.log("old wp", oldwp);
-  // const newwp = new Array(oldwp.length).fill(0);
-  // let i = 0;
-  // for (let i = 0; i < oldwp.length; i++) {
-  //   console.log(oldwp[result2[index][i]]);
-  //   newwp[i] = oldwp[result2[index][i]];
-  // }
-  // console.log("toa do moi", newwp);
-  // control.getPlan().setWaypoints(newwp);
-  // control.show(); //show chi duong chi tiet
-  // control.route();
-  // console.log(control.getRouter());
+  console.log("old wp", oldwp);
+  const newwp = new Array(oldwp.length).fill(0);
+  let i = 0;
+  for (let i = 0; i < oldwp.length; i++) {
+    console.log(oldwp[result2[index][i]]);
+    newwp[i] = oldwp[result2[index][i]];
+  }
+  console.log("toa do moi", newwp);
+  control.getPlan().setWaypoints(newwp);
+  control.show(); //show chi duong chi tiet
+  control.route();
+  console.log(control.getRouter());
   return [result2[index], min];
 }
 export const SolveSTP2 = async control => {
