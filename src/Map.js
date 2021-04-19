@@ -22,6 +22,7 @@ export const control = L.Routing.control({
   routeWhileDragging: false,
   autoRoute: false,
   useZoomParameter: false,
+  allowUTurns: false,
   // lineOptions: {
   //   styles: [{ className: "animate" }], // Adding animate class
   // },
