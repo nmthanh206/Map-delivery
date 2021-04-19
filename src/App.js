@@ -4,10 +4,9 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import MyLocation from "./Components/MyLocation";
 import { control } from "./Map";
 import SideBar from "./Components/SideBar/Sidebar";
-import { solveSTP } from "./Ulti/solveSTP";
-import { getMatrix } from "./Ulti/getMatrix";
 import { SolveSTP2 } from "./test2";
-import L from "leaflet";
+import searchBarLeft from "./Components/Search/SearchLeft";
+import searchBarCenter from "./Components/Search/SearchCenter.js";
 const ps = [
   [10.841172501968856, 106.75928732628947],
   [10.847944564456817, 106.76160644370741],
@@ -26,9 +25,6 @@ const costMatrix = [
 function App() {
   const position = [10.841172501968856, 106.75928730628947];
   const [map, setMap] = useState(null);
-  // useEffect(() => {
-  //   solveSTP().then(res => console.log(res));
-  // }, []);
   return (
     <>
       <button
@@ -68,6 +64,19 @@ function App() {
           setMap(map);
           control.addTo(map);
           control.hide(); //show chi duong chi tiet
+          map.addControl(searchBarLeft);
+          searchBarLeft.on("results", data => {
+            if (data.results.length !== 1) return;
+            const points = control
+              .getPlan()
+              .getWaypoints()
+              .map(({ latLng }) => [latLng.lat, latLng.lng]);
+            control
+              .getPlan()
+              .setWaypoints([...points, [data.latlng.lat, data.latlng.lng]]);
+          });
+
+          map.addControl(searchBarCenter);
           // map.locate();
           // solveSTP().then(res => console.log(res));
           // const points = control
