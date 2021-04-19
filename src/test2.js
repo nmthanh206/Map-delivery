@@ -97,7 +97,7 @@ async function SolveSTP(control, map) {
   const points = pointsArray.toString().replaceAll(";,", ";").slice(0, -1);
   // console.log(costMatrix);
   const curb = Array(pointsArray.length).fill("curb").join(";");
-  const url = `https://api.mapbox.com/directions-matrix/v1/mapbox/driving/${points}?approaches=${curb}&access_token=${MY_TOKEN}`;
+  const url = `https://api.mapbox.com/directions-matrix/v1/mapbox/driving/${points}?approaches=${curb}&annotations=distance&access_token=${MY_TOKEN}`;
   console.log(url);
   const solution = await axios.get(url);
   console.log(solution.data.durations);
