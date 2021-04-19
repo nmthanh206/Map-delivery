@@ -34,57 +34,57 @@ export const control = L.Routing.control({
     ],
   },
 
-  createMarker: function (index, wps, n) {
-    // console.log(wps);
+  // createMarker: function (index, wps, n) {
+  //   // console.log(wps);
 
-    const marker = L.marker(wps.latLng, {
-      draggable: true,
-      bounceOnAdd: true,
-      bounceOnAddOptions: {
-        duration: 1000,
-        height: 800,
-      },
-    })
-      .bindPopup(() => {
-        //    console.log(marker.getLatLng(), wps.latLng);
-        // if (
-        //   !marker.getPopup() &&
-        //   JSON.stringify(marker.getLatLng()) === JSON.stringify(wps.latLng)
-        // )
-        //   return marker.getPopup();
-        getAddress(wps.latLng.lat, wps.latLng.lng).then(res => {
-          console.log(res);
-          marker.bindPopup(res.data.display_name);
-        });
-        return "";
-      })
-      .openPopup()
-      .on("contextmenu", e => {
-        const waypoints = control
-          .getPlan()
-          .getWaypoints()
-          .map(wp => wp.latLng);
-        const newWaypoints = waypoints.filter(
-          wp => JSON.stringify(wp) !== JSON.stringify(e.latlng)
-        );
-        control.getPlan().setWaypoints(newWaypoints);
-        //  control.spliceWaypoints(index, index + 1);
-      })
-      .on("dragend", () => {
-        getAddress(wps.latLng.lat, wps.latLng.lng).then(res => {
-          console.log(res);
-          marker.bindPopup(res.data.display_name);
-        });
-      });
+  //   const marker = L.marker(wps.latLng, {
+  //     draggable: true,
+  //     bounceOnAdd: true,
+  //     bounceOnAddOptions: {
+  //       duration: 1000,
+  //       height: 800,
+  //     },
+  //   })
+  //     .bindPopup(() => {
+  //       //    console.log(marker.getLatLng(), wps.latLng);
+  //       // if (
+  //       //   !marker.getPopup() &&
+  //       //   JSON.stringify(marker.getLatLng()) === JSON.stringify(wps.latLng)
+  //       // )
+  //       //   return marker.getPopup();
+  //       getAddress(wps.latLng.lat, wps.latLng.lng).then(res => {
+  //         console.log(res);
+  //         marker.bindPopup(res.data.display_name);
+  //       });
+  //       return "";
+  //     })
+  //     .openPopup()
+  //     .on("contextmenu", e => {
+  //       const waypoints = control
+  //         .getPlan()
+  //         .getWaypoints()
+  //         .map(wp => wp.latLng);
+  //       const newWaypoints = waypoints.filter(
+  //         wp => JSON.stringify(wp) !== JSON.stringify(e.latlng)
+  //       );
+  //       control.getPlan().setWaypoints(newWaypoints);
+  //       //  control.spliceWaypoints(index, index + 1);
+  //     })
+  //     .on("dragend", () => {
+  //       getAddress(wps.latLng.lat, wps.latLng.lng).then(res => {
+  //         console.log(res);
+  //         marker.bindPopup(res.data.display_name);
+  //       });
+  //     });
 
-    return marker;
-  },
+  //   return marker;
+  // },
 }).on("routesfound", function (e) {
   const distance = e.routes[0].summary.totalDistance;
   console.log("routing distance: " + distance);
 });
 
-export const marker = setPoints => {
+export const createMarker = setPoints => {
   return (index, wps, n) => {
     const marker = L.marker(wps.latLng, {
       draggable: true,
@@ -116,6 +116,12 @@ export const marker = setPoints => {
       })
       .on("dragend", () => {
         getAddress(wps.latLng.lat, wps.latLng.lng).then(res => {
+          const waypoints = control
+            .getPlan()
+            .getWaypoints()
+            .map(wp => [wp.latLng.lat, wp.latLng.lng]);
+          console.log(waypoints);
+          setPoints(waypoints);
           console.log(res);
           marker.bindPopup(res.data.display_name);
         });

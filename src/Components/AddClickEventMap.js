@@ -21,12 +21,7 @@ const AddClickEventMap = ({ points, setPoints }) => {
         control.getPlan().setWaypoints([...wPs, e.latlng]);
         console.log(control.getPlan().getWaypoints());
       }, 100);
-      // rounting.getPlan().setWaypoints([...wPs, e.latlng]);
-      // .addTo(map);
     },
-    // contextmenu(e) {
-    //   console.log(e.target);
-    // },
   });
 
   return null;

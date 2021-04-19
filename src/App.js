@@ -7,9 +7,8 @@ import SideBar from "./Components/SideBar/Sidebar";
 import { SolveSTP2 } from "./test2";
 import searchBarLeft from "./Components/Search/SearchLeft";
 import searchBarCenter from "./Components/Search/SearchCenter.js";
-import SlideBar from "./Components/SideBar/Sidebar";
 import AddClickEventMap from "./Components/AddClickEventMap";
-import { marker } from "./Map";
+import { createMarker } from "./Map";
 const ps = [
   [10.841172501968856, 106.75928732628947],
   [10.847944564456817, 106.76160644370741],
@@ -86,16 +85,9 @@ function App() {
                 .getPlan()
                 .setWaypoints([...points, [data.latlng.lat, data.latlng.lng]]);
             });
-
             map.addControl(searchBarCenter);
-            control.getPlan().options.createMarker = marker(setPoints);
+            control.getPlan().options.createMarker = createMarker(setPoints);
             // map.locate();
-            // solveSTP().then(res => console.log(res));
-            // const points = control
-            //   .getPlan()
-            //   .getWaypoints()
-            //   .map(({ latLng }) => [latLng.lat, latLng.lng]);
-            // console.log(points);
           }}
         >
           {/* <MyLocation /> */}

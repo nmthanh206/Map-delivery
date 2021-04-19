@@ -4,7 +4,7 @@ import "./Sidebar.css";
 import { getAddress } from "../../Ulti/getAddress";
 const SideBar = ({ points, map }) => {
   const listLocationDetails = points.map((point, i) => {
-    return <LocationDetail map={map} latlng={point} name={"culi"} />;
+    return <LocationDetail map={map} latlng={point} />;
   });
   console.log(listLocationDetails);
   return (
