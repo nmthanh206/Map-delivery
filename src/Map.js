@@ -16,7 +16,7 @@ export const control = L.Routing.control({
   show: false,
   routeWhileDragging: true,
   showAlternatives: true,
-
+  addWaypoints: true,
   altLineOptions: {
     styles: [
       { color: "black", opacity: 0.15, weight: 9 },
@@ -25,6 +25,7 @@ export const control = L.Routing.control({
     ],
   },
   autoRoute: false,
+  routeWhileDragging: false,
   createMarker: function (index, wps, n) {
     // console.log(wps);
     const marker = L.marker(wps.latLng, {
@@ -36,7 +37,12 @@ export const control = L.Routing.control({
       },
     })
       .bindPopup(() => {
-        if (!marker.getPopup()) return marker.getPopup();
+        //    console.log(marker.getLatLng(), wps.latLng);
+        // if (
+        //   !marker.getPopup() &&
+        //   JSON.stringify(marker.getLatLng()) === JSON.stringify(wps.latLng)
+        // )
+        //   return marker.getPopup();
         getAddress(wps.latLng.lat, wps.latLng.lng).then(res => {
           console.log(res);
           marker.bindPopup(res.data.display_name);
@@ -54,6 +60,12 @@ export const control = L.Routing.control({
         );
         control.getPlan().setWaypoints(newWaypoints);
         //  control.spliceWaypoints(index, index + 1);
+      })
+      .on("dragend", () => {
+        getAddress(wps.latLng.lat, wps.latLng.lng).then(res => {
+          console.log(res);
+          marker.bindPopup(res.data.display_name);
+        });
       });
 
     return marker;

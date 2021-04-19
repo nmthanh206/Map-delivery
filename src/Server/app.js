@@ -30,3 +30,14 @@ app.listen(3001, () => console.log("server running at http://localhost:3001/"));
 // console.log(string);
 // const array = JSON.parse(string);
 // console.log(array);
+
+// const costMatrix = [
+//   [0, 1, 3, 4],
+//   [1, 0, 2, 3],
+//   [3, 2, 0, 5],
+//   [4, 3, 5, 0],
+// ];
+
+// solver.solveTsp(costMatrix, true, {}).then(function (result) {
+//   console.log(result);
+// });
