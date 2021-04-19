@@ -8,6 +8,7 @@ import { SolveSTP2 } from "./test2";
 import searchBarLeft from "./Components/Search/SearchLeft";
 import searchBarCenter from "./Components/Search/SearchCenter.js";
 import SlideBar from "./Components/SideBar/Sidebar";
+import AddClickEventMap from "./Components/AddClickEventMap";
 const ps = [
   [10.841172501968856, 106.75928732628947],
   [10.847944564456817, 106.76160644370741],
@@ -23,13 +24,14 @@ const costMatrix = [
   [4, 3, 5, 0],
 ];
 
-const points = control
+const wp = control
   .getPlan()
   .getWaypoints()
   .map(({ latLng }) => [latLng.lat, latLng.lng]);
 function App() {
   const position = [10.841172501968856, 106.75928730628947];
   const [map, setMap] = useState(null);
+  const [points, setPoints] = useState(wp);
 
   return (
     <>
@@ -92,7 +94,8 @@ function App() {
             // console.log(points);
           }}
         >
-          <MyLocation />
+          {/* <MyLocation /> */}
+          <AddClickEventMap />
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
