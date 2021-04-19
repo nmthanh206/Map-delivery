@@ -7,6 +7,7 @@ import SideBar from "./Components/SideBar/Sidebar";
 import { SolveSTP2 } from "./test2";
 import searchBarLeft from "./Components/Search/SearchLeft";
 import searchBarCenter from "./Components/Search/SearchCenter.js";
+import SlideBar from "./Components/SideBar/Sidebar";
 const ps = [
   [10.841172501968856, 106.75928732628947],
   [10.847944564456817, 106.76160644370741],
@@ -22,9 +23,14 @@ const costMatrix = [
   [4, 3, 5, 0],
 ];
 
+const points = control
+  .getPlan()
+  .getWaypoints()
+  .map(({ latLng }) => [latLng.lat, latLng.lng]);
 function App() {
   const position = [10.841172501968856, 106.75928730628947];
   const [map, setMap] = useState(null);
+
   return (
     <>
       <button
@@ -54,45 +60,46 @@ function App() {
       >
         Clear Points
       </button>
-      {/* <div className="map-bar"> */}
-      {/* <SideBar /> */}
-      <MapContainer
-        center={position}
-        zoom={13}
-        scrollWheelZoom={true}
-        whenCreated={map => {
-          setMap(map);
-          control.addTo(map);
-          control.hide(); //show chi duong chi tiet
-          map.addControl(searchBarLeft);
-          searchBarLeft.on("results", data => {
-            if (data.results.length !== 1) return;
-            const points = control
-              .getPlan()
-              .getWaypoints()
-              .map(({ latLng }) => [latLng.lat, latLng.lng]);
-            control
-              .getPlan()
-              .setWaypoints([...points, [data.latlng.lat, data.latlng.lng]]);
-          });
+      <div className="map-bar">
+        {/* <SideBar /> */}
+        <MapContainer
+          center={position}
+          zoom={13}
+          scrollWheelZoom={true}
+          whenCreated={map => {
+            setMap(map);
+            control.addTo(map);
+            control.hide(); //show chi duong chi tiet
+            map.addControl(searchBarLeft);
+            searchBarLeft.on("results", data => {
+              if (data.results.length !== 1) return;
+              const points = control
+                .getPlan()
+                .getWaypoints()
+                .map(({ latLng }) => [latLng.lat, latLng.lng]);
+              control
+                .getPlan()
+                .setWaypoints([...points, [data.latlng.lat, data.latlng.lng]]);
+            });
 
-          map.addControl(searchBarCenter);
-          // map.locate();
-          // solveSTP().then(res => console.log(res));
-          // const points = control
-          //   .getPlan()
-          //   .getWaypoints()
-          //   .map(({ latLng }) => [latLng.lat, latLng.lng]);
-          // console.log(points);
-        }}
-      >
-        <MyLocation />
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
-        />
-      </MapContainer>
-      {/* </div> */}
+            map.addControl(searchBarCenter);
+            // map.locate();
+            // solveSTP().then(res => console.log(res));
+            // const points = control
+            //   .getPlan()
+            //   .getWaypoints()
+            //   .map(({ latLng }) => [latLng.lat, latLng.lng]);
+            // console.log(points);
+          }}
+        >
+          <MyLocation />
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+          />
+        </MapContainer>
+        <SideBar points={points} map={map} />
+      </div>
     </>
   );
 }

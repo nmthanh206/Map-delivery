@@ -1,0 +1,60 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.SupportToolsArea {
+  position: absolute;
+  right: 0;
+  width: 30vw;
+  height: 100%;
+  background-color: #0cb97e;
+  display: block;
+  text-align: center;
+}
+
+h4 {
+  text-align: left;
+  margin-left: 1em;
+  margin-top: 2em;
+  color: white;
+}
+
+#Location {
+  margin-top: 0.2em;
+  width: 90%;
+  font-size: 1.2em;
+}
+
+#Save {
+  margin-top: 2em;
+  width: 40%;
+  height: 2em;
+  border-radius: 20px;
+}
+
+.button:hover {
+  background-color: greenyellow;
+  cursor: pointer;
+}
+
+#Start {
+  margin: 1em;
+  margin-top: 2.5em;
+  width: 90%;
+  height: 1.5em;
+}
+
+#Inputed {
+  display: block;
+  margin: 1em;
+  width: 90%;
+  height: 50vh;
+}

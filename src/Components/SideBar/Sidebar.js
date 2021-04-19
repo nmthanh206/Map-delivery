@@ -1,48 +1,26 @@
 import React from "react";
-import "./Sidebar.module.css";
-function Sidebar() {
+import LocationDetail from "./LocationDetail";
+import "./Sidebar.css";
+import { getAddress } from "../../Ulti/getAddress";
+const SideBar = ({ points, map }) => {
+  const listLocationDetails = points.map((point, i) => {
+    return <LocationDetail map={map} latlng={point} name={"culi"} />;
+  });
+  console.log(listLocationDetails);
   return (
-    <div class="sidebar">
-      <ul class="workouts">
-        <form class="form hidden">
-          <div class="form__row">
-            <label class="form__label">Type</label>
-            <select class="form__input form__input--type">
-              <option value="running">Running</option>
-              <option value="cycling">Cycling</option>
-            </select>
-          </div>
-          <div class="form__row">
-            <label class="form__label">Distance</label>
-            <input class="form__input form__input--distance" placeholder="km" />
-          </div>
-          <div class="form__row">
-            <label class="form__label">Duration</label>
-            <input
-              class="form__input form__input--duration"
-              placeholder="min"
-            />
-          </div>
-
-          <div class="form__row">
-            <label class="form__label">Cadence</label>
-            <input
-              class="form__input form__input--cadence"
-              placeholder="step/min"
-            />
-          </div>
-          <div class="form__row form__row--hidden">
-            <label class="form__label">Elev Gain</label>
-            <input
-              class="form__input form__input--elevation"
-              placeholder="meters"
-            />
-          </div>
-          <button class="form__btn">OK</button>
-        </form>
-      </ul>
+    <div class="SupportToolsArea">
+      <form>
+        <h4>INPUT LOCATION:</h4>
+        <input type="text" id="Location" />
+        <input type="button" value="SAVE" id="Save" class="button" />
+        <br />
+        <br />
+        <h4>LOCATION IN JOURNEY:</h4>
+        {listLocationDetails}
+        <input type="button" value="START" id="Start" class="button" />
+      </form>
     </div>
   );
-}
+};
 
-export default Sidebar;
+export default SideBar;
