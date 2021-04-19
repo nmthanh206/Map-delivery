@@ -9,6 +9,7 @@ import searchBarLeft from "./Components/Search/SearchLeft";
 import searchBarCenter from "./Components/Search/SearchCenter.js";
 import SlideBar from "./Components/SideBar/Sidebar";
 import AddClickEventMap from "./Components/AddClickEventMap";
+import { marker } from "./Map";
 const ps = [
   [10.841172501968856, 106.75928732628947],
   [10.847944564456817, 106.76160644370741],
@@ -37,6 +38,7 @@ function App() {
     <>
       <button
         onClick={() => {
+          // console.log(map.getBounds());
           SolveSTP2(control, map);
 
           // const wps = control
@@ -57,8 +59,9 @@ function App() {
         onClick={() => {
           control.hide();
           control.getPlan().setWaypoints(null);
+          setPoints([[]]);
         }}
-        style={{ position: "absolute", top: "2px", left: "50px" }}
+        style={{ position: "absolute", top: "2px", left: "100px" }}
       >
         Clear Points
       </button>
@@ -85,6 +88,7 @@ function App() {
             });
 
             map.addControl(searchBarCenter);
+            control.getPlan().options.createMarker = marker(setPoints);
             // map.locate();
             // solveSTP().then(res => console.log(res));
             // const points = control
@@ -95,7 +99,7 @@ function App() {
           }}
         >
           {/* <MyLocation /> */}
-          <AddClickEventMap />
+          <AddClickEventMap points={points} setPoints={setPoints} />
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"

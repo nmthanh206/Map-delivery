@@ -8,16 +8,16 @@ const SideBar = ({ points, map }) => {
   });
   console.log(listLocationDetails);
   return (
-    <div class="SupportToolsArea">
+    <div className="SupportToolsArea">
       <form>
         <h4>INPUT LOCATION:</h4>
         <input type="text" id="Location" />
-        <input type="button" value="SAVE" id="Save" class="button" />
+        <input type="button" value="SAVE" id="Save" className="button" />
         <br />
         <br />
         <h4>LOCATION IN JOURNEY:</h4>
         {listLocationDetails}
-        <input type="button" value="START" id="Start" class="button" />
+        <input type="button" value="START" id="Start" className="button" />
       </form>
     </div>
   );

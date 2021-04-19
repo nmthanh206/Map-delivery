@@ -1,6 +1,7 @@
 import { useMapEvents } from "react-leaflet";
 import { control } from "../Map";
-const AddClickEventMap = () => {
+const AddClickEventMap = ({ points, setPoints }) => {
+  console.log("EventClick render !!");
   const map = useMapEvents({
     click(e) {
       const wps = control
@@ -15,6 +16,7 @@ const AddClickEventMap = () => {
         .getWaypoints()
         .map(wp => wp.latLng);
       // map.removeControl(rounting);
+      setPoints([...points, [e.latlng.lat, e.latlng.lng]]);
       setTimeout(() => {
         control.getPlan().setWaypoints([...wPs, e.latlng]);
         console.log(control.getPlan().getWaypoints());
@@ -22,6 +24,9 @@ const AddClickEventMap = () => {
       // rounting.getPlan().setWaypoints([...wPs, e.latlng]);
       // .addTo(map);
     },
+    // contextmenu(e) {
+    //   console.log(e.target);
+    // },
   });
 
   return null;
