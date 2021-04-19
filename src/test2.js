@@ -100,11 +100,12 @@ async function SolveSTP(control, map) {
   // const url = `https://api.mapbox.com/directions-matrix/v1/mapbox/driving/${points}?approaches=${curb}&annotations=distance&access_token=${MY_TOKEN}`;
   const url = `https://api.mapbox.com/directions-matrix/v1/mapbox/driving/${points}?annotations=distance&access_token=${MY_TOKEN}`;
   console.log(url);
+  console.log(url);
   const solution = await axios.get(url);
-  console.log(solution.data.durations);
+  console.log(solution.data.distances);
   // return;
   // const costMatrix = getMatrix(pointsArray);
-  const costMatrix = solution.data.durations;
+  const costMatrix = solution.data.distances;
   // const result2 = permutator(
   //   Array.from(Array(pointsArray.length).keys())
   // ).map(path => [...path]);
@@ -128,23 +129,23 @@ async function SolveSTP(control, map) {
     }
   }
 
-  const oldwp = control
-    .getPlan()
-    .getWaypoints()
-    .map(({ latLng }) => [latLng.lat, latLng.lng]);
+  // const oldwp = control
+  //   .getPlan()
+  //   .getWaypoints()
+  //   .map(({ latLng }) => [latLng.lat, latLng.lng]);
 
-  console.log("old wp", oldwp);
-  const newwp = new Array(oldwp.length).fill(0);
-  let i = 0;
-  for (let i = 0; i < oldwp.length; i++) {
-    console.log(oldwp[result2[index][i]]);
-    newwp[i] = oldwp[result2[index][i]];
-  }
-  console.log("toa do moi", newwp);
-  control.getPlan().setWaypoints(newwp);
-  control.show(); //show chi duong chi tiet
-  control.route();
-  console.log(control.getRouter());
+  // console.log("old wp", oldwp);
+  // const newwp = new Array(oldwp.length).fill(0);
+  // let i = 0;
+  // for (let i = 0; i < oldwp.length; i++) {
+  //   console.log(oldwp[result2[index][i]]);
+  //   newwp[i] = oldwp[result2[index][i]];
+  // }
+  // console.log("toa do moi", newwp);
+  // control.getPlan().setWaypoints(newwp);
+  // control.show(); //show chi duong chi tiet
+  // control.route();
+  // console.log(control.getRouter());
   return [result2[index], min];
 }
 export const SolveSTP2 = async control => {
