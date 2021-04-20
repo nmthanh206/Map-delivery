@@ -102,10 +102,10 @@ function App() {
             map.addControl(searchBarCenter);
             searchBarCenter.options.popupFormat = formatResult(setPoints);
             control.getPlan().options.createMarker = createMarker(setPoints);
-            // map.locate();
+            map.locate();
           }}
         >
-          {/* <MyLocation setPoints={setPoints} /> */}
+          <MyLocation setPoints={setPoints} />
           <AddClickEventMap points={points} setPoints={setPoints} />
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
