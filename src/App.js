@@ -9,6 +9,7 @@ import searchBarLeft from "./Components/Search/SearchLeft";
 import searchBarCenter from "./Components/Search/SearchCenter.js";
 import AddClickEventMap from "./Components/AddClickEventMap";
 import { createMarker } from "./Map";
+import { formatResult } from "./Components/Search/SearchCenter";
 const ps = [
   [10.841172501968856, 106.75928732628947],
   [10.847944564456817, 106.76160644370741],
@@ -39,7 +40,7 @@ function App() {
         onClick={() => {
           // console.log(map.getBounds());
           SolveSTP2(control, map);
-
+          // console.log("seachcenter", searchBarCenter.options.popupFormat);
           // const wps = control
           //   .getPlan()
           //   .getWaypoints()
@@ -84,8 +85,16 @@ function App() {
               control
                 .getPlan()
                 .setWaypoints([...points, [data.latlng.lat, data.latlng.lng]]);
+
+              const waypoints = control
+                .getPlan()
+                .getWaypoints()
+                .map(wp => wp.latLng);
+              control.getPlan().setWaypoints(waypoints);
+              setPoints([...points, [data.latlng.lat, data.latlng.lng]]);
             });
             map.addControl(searchBarCenter);
+            searchBarCenter.options.popupFormat = formatResult(setPoints);
             control.getPlan().options.createMarker = createMarker(setPoints);
             // map.locate();
           }}

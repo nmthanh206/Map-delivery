@@ -10,15 +10,22 @@ const searchControl = new GeoSearchControl({
     icon: new L.Icon.Default(),
     draggable: false,
   },
-  popupFormat: ({ query, result }) => {
-    //  if (data.results.length !== 1) return;
-    console.log(query, result);
-    const points = control
-      .getPlan()
-      .getWaypoints()
-      .map(({ latLng }) => [latLng.lat, latLng.lng]);
-    control.getPlan().setWaypoints([...points, [query.data.y, query.data.x]]);
-  }, // optional: function    - default returns result label,
+  // popupFormat: ({ query, result }) => {
+  //   //  if (data.results.length !== 1) return;
+  //   console.log(query, result);
+  //   const points = control
+  //     .getPlan()
+  //     .getWaypoints()
+  //     .map(({ latLng }) => [latLng.lat, latLng.lng]);
+  //   control.getPlan().setWaypoints([...points, [query.data.y, query.data.x]]);
+  ///----------------------
+  //   const waypoints = control
+  //   .getPlan()
+  //   .getWaypoints()
+  //   .map(wp => wp.latLng);
+  // control.getPlan().setWaypoints(waypoints);
+  // setPoints([...points, [data.latlng.lat, data.latlng.lng]]);
+  // }, // optional: function    - default returns result label,
   resultFormat: ({ result }) => result.label, // optional: function    - default returns result label
   maxMarkers: 1, // optional: number      - default 1
   retainZoomLevel: false, // optional: true|false  - default false
@@ -32,3 +39,20 @@ const searchControl = new GeoSearchControl({
 });
 
 export default searchControl;
+export const formatResult = setPoints => {
+  return ({ query, result }) => {
+    //  if (data.results.length !== 1) return;
+    console.log(query, result);
+    const points = control
+      .getPlan()
+      .getWaypoints()
+      .map(({ latLng }) => [latLng.lat, latLng.lng]);
+    control.getPlan().setWaypoints([...points, [query.data.y, query.data.x]]);
+    const waypoints = control
+      .getPlan()
+      .getWaypoints()
+      .map(wp => wp.latLng);
+    control.getPlan().setWaypoints(waypoints);
+    setPoints([...points, [query.data.y, query.data.x]]);
+  };
+};
