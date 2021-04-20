@@ -7,6 +7,10 @@ const LocationDetail = ({ latlng, map }) => {
     if (latlng.length === 0) return;
     console.log("useEffect run");
     getAddress(latlng[0], latlng[1]).then(res => {
+      if (!res) {
+        setName("Không có mạng !!");
+        return;
+      }
       console.log(res.data);
       setName(res.data.display_name);
     });
@@ -16,8 +20,6 @@ const LocationDetail = ({ latlng, map }) => {
       className="detail-location"
       onClick={() => map.flyTo(latlng, map.getZoom())}
     >
-      {/* <div>{`lat: ${latlng[0].toFixed(6)} 
-       lng: ${latlng[1].toFixed(6)}`}</div> */}
       <div className="detail-address">{name}</div>
     </div>
   ) : null;

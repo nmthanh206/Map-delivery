@@ -104,10 +104,11 @@ export const createMarker = setPoints => {
       })
       .openPopup()
       .on("contextmenu", e => {
+        console.log("contextmenu");
         const waypoints = control
           .getPlan()
           .getWaypoints()
-          .map(wp => wp.latLng);
+          .filter(wp => wp.latLng);
         const newWaypoints = waypoints.filter(
           wp => JSON.stringify(wp) !== JSON.stringify(e.latlng)
         );

@@ -78,6 +78,12 @@ function App() {
             map.addControl(searchBarLeft);
             searchBarLeft.on("results", data => {
               if (data.results.length !== 1) return;
+
+              const wps = control
+                .getPlan()
+                .getWaypoints()
+                .filter(wp => wp.latLng);
+              control.getPlan().setWaypoints(wps);
               const points = control
                 .getPlan()
                 .getWaypoints()
@@ -99,7 +105,7 @@ function App() {
             // map.locate();
           }}
         >
-          {/* <MyLocation /> */}
+          {/* <MyLocation setPoints={setPoints} /> */}
           <AddClickEventMap points={points} setPoints={setPoints} />
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
