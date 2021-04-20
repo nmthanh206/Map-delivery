@@ -58,8 +58,8 @@ function App() {
       <button
         onClick={() => {
           control.hide();
-          control.getPlan().setWaypoints(null);
-          setPoints([[]]);
+          control.getPlan().setWaypoints([null]);
+          setPoints([null]);
         }}
         style={{ position: "absolute", top: "2px", left: "100px" }}
       >

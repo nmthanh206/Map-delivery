@@ -113,6 +113,11 @@ export const createMarker = setPoints => {
           wp => JSON.stringify(wp) !== JSON.stringify(e.latlng)
         );
         control.getPlan().setWaypoints(newWaypoints);
+        if (!newWaypoints[0]) {
+          setPoints([...newWaypoints]);
+          return;
+        }
+        console.log(newWaypoints);
         const newWpArray = newWaypoints.map(wp => [wp.lat, wp.lng]);
         setPoints([...newWpArray]);
       })
