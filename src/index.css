@@ -111,3 +111,7 @@ code {
   cursor: pointer;
   z-index: 99999;
 }
+.leaflet-geosearch-bar {
+  width: 30rem !important;
+  left: -8rem;
+}

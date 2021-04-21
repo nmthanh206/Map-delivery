@@ -3,7 +3,7 @@ import LocationDetail from "./LocationDetail";
 import "./Sidebar.css";
 import { SolveSTP2 } from "../../Ulti/solveSTP2";
 import { v4 as uuidv4 } from "uuid";
-let method = "cycling";
+let method = "walking";
 const SideBar = ({ points, map, control, setPoints, children }) => {
   const listLocationDetails = points.map((point, i) => {
     return point ? (
