@@ -26,7 +26,12 @@ const LocationDetail = ({ point, map }) => {
   return point ? (
     <div
       className="detail-location"
-      onClick={() => map.flyTo(point, map.getZoom())}
+      onClick={() =>
+        map.flyTo(point, 17, {
+          animate: true,
+          duration: 1.5,
+        })
+      }
     >
       <h3 className="detail-address">{name}</h3>
     </div>
