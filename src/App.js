@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
-
 import MyLocation from "./Components/MyLocation";
 import { control } from "./Map";
 import SideBar from "./Components/SideBar/Sidebar";
-import { SolveSTP2 } from "./test2";
 import searchBarLeft from "./Components/Search/SearchLeft";
 import searchBarCenter from "./Components/Search/SearchCenter.js";
 import AddClickEventMap from "./Components/AddClickEventMap";
@@ -55,38 +52,7 @@ function App() {
   };
   return (
     <>
-      <button
-        onClick={() => {
-          SolveSTP2(control, map);
-        }}
-        style={{ position: "absolute", top: "2px" }}
-      >
-        Find Route
-      </button>
-      <button
-        onClick={() => {
-          control.hide();
-          control.getPlan().setWaypoints([null]);
-          setPoints([null]);
-        }}
-        style={{ position: "absolute", top: "2px", left: "100px" }}
-      >
-        Clear Points
-      </button>
       <div className="map-bar">
-        {/* <MapContainer
-          center={position}
-          zoom={13}
-          scrollWheelZoom={true}
-          whenCreated={setUpMap}
-        >
-          <MyLocation setPoints={setPoints} />
-          <AddClickEventMap points={points} setPoints={setPoints} />
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
-          />
-        </MapContainer> */}
         <MapSetUp
           center={position}
           zoom={13}
@@ -96,7 +62,12 @@ function App() {
           <MyLocation setPoints={setPoints} />
           <AddClickEventMap points={points} setPoints={setPoints} />
         </MapSetUp>
-        <SideBar points={points} map={map} />
+        <SideBar
+          points={points}
+          map={map}
+          control={control}
+          setPoints={setPoints}
+        />
       </div>
     </>
   );
