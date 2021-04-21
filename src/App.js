@@ -9,7 +9,8 @@ import searchBarLeft from "./Components/Search/SearchLeft";
 import searchBarCenter from "./Components/Search/SearchCenter.js";
 import AddClickEventMap from "./Components/AddClickEventMap";
 import { createMarker } from "./Map";
-import { formatResult } from "./Components/Search/SearchCenter";
+import { popupFormat } from "./Components/Search/SearchCenter";
+import { getWayPointsArray } from "./Ulti/getWayPointsArray";
 const ps = [
   [10.841172501968856, 106.75928732628947],
   [10.847944564456817, 106.76160644370741],
@@ -33,23 +34,29 @@ function App() {
   const position = [10.841172501968856, 106.75928730628947];
   const [map, setMap] = useState(null);
   const [points, setPoints] = useState(wp);
-
+  const setUpMap = map => {
+    setMap(map);
+    control.addTo(map);
+    control.hide(); //show chi duong chi tiet
+    map.addControl(searchBarLeft);
+    searchBarLeft.on("results", data => {
+      if (data.results.length !== 1) return;
+      const wpsArray = getWayPointsArray(control);
+      control
+        .getPlan()
+        .setWaypoints([...wpsArray, [data.latlng.lat, data.latlng.lng]]);
+      setPoints([...wpsArray, [data.latlng.lat, data.latlng.lng]]);
+    });
+    map.addControl(searchBarCenter);
+    searchBarCenter.options.popupFormat = popupFormat(setPoints);
+    control.getPlan().options.createMarker = createMarker(setPoints);
+    map.locate();
+  };
   return (
     <>
       <button
         onClick={() => {
-          // console.log(map.getBounds());
           SolveSTP2(control, map);
-          // console.log("seachcenter", searchBarCenter.options.popupFormat);
-          // const wps = control
-          //   .getPlan()
-          //   .getWaypoints()
-          //   .filter(wp => wp.latLng); //bo may wps bi null ma no tu seet amc dinh neu minh ko set 2 cai wp ban dau cho no
-          // control.getPlan().setWaypoints(wps);
-          // control.addTo(map);
-          // control.route();
-          // console.log(control.getRouter());
-          // control.show(); //show chi duong chi tiet
         }}
         style={{ position: "absolute", top: "2px" }}
       >
@@ -71,39 +78,7 @@ function App() {
           center={position}
           zoom={13}
           scrollWheelZoom={true}
-          whenCreated={map => {
-            setMap(map);
-            control.addTo(map);
-            control.hide(); //show chi duong chi tiet
-            map.addControl(searchBarLeft);
-            searchBarLeft.on("results", data => {
-              if (data.results.length !== 1) return;
-
-              const wps = control
-                .getPlan()
-                .getWaypoints()
-                .filter(wp => wp.latLng);
-              control.getPlan().setWaypoints(wps);
-              const points = control
-                .getPlan()
-                .getWaypoints()
-                .map(({ latLng }) => [latLng.lat, latLng.lng]);
-              control
-                .getPlan()
-                .setWaypoints([...points, [data.latlng.lat, data.latlng.lng]]);
-
-              const waypoints = control
-                .getPlan()
-                .getWaypoints()
-                .map(wp => wp.latLng);
-              control.getPlan().setWaypoints(waypoints);
-              setPoints([...points, [data.latlng.lat, data.latlng.lng]]);
-            });
-            map.addControl(searchBarCenter);
-            searchBarCenter.options.popupFormat = formatResult(setPoints);
-            control.getPlan().options.createMarker = createMarker(setPoints);
-            map.locate();
-          }}
+          whenCreated={setUpMap}
         >
           <MyLocation setPoints={setPoints} />
           <AddClickEventMap points={points} setPoints={setPoints} />

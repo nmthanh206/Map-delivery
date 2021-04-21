@@ -4,16 +4,22 @@ const LocationDetail = ({ latlng, map }) => {
   //  console.log(latlng, name);
   const [name, setName] = useState("");
   useEffect(() => {
+    let isCancelled = false;
     if (!latlng) return;
     console.log("useEffect run");
     getAddress(latlng[0], latlng[1]).then(res => {
-      if (!res) {
-        setName("Không có mạng !!");
-        return;
+      if (!isCancelled) {
+        if (!res) {
+          setName("Không có mạng !!");
+          return;
+        }
+        console.log(res.data);
+        setName(res.data.display_name);
       }
-      console.log(res.data);
-      setName(res.data.display_name);
     });
+    return () => {
+      isCancelled = true;
+    };
   }, [latlng]);
   return latlng ? (
     <div
