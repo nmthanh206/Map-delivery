@@ -29,7 +29,7 @@ const permutator = inputArr => {
 //   [4, 3, 5, 0],
 // ];
 
-async function SolveSTP(control, map) {
+async function SolveSTP(control, setPoints) {
   const wps = control
     .getPlan()
     .getWaypoints()
@@ -85,12 +85,14 @@ async function SolveSTP(control, map) {
   }
   console.log("toa do moi", newwp);
   control.getPlan().setWaypoints(newwp);
+  setPoints(newwp);
+  console.log(setPoints);
   control.show(); //show chi duong chi tiet
   control.route();
   console.log(control.getRouter());
   return [result2[index], min];
 }
-export const SolveSTP2 = async control => {
-  const result = await SolveSTP(control);
+export const SolveSTP2 = async (control, setPoints) => {
+  const result = await SolveSTP(control, setPoints);
   console.log(result);
 };

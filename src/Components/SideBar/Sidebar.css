@@ -94,3 +94,12 @@ h4 {
   display: flex;
   justify-content: space-around;
 }
+.container-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+}
+.container-box h1 {
+  margin-left: 2rem;
+}

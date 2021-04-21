@@ -2,7 +2,7 @@ import L from "leaflet";
 import "leaflet-routing-machine";
 import "lrm-google";
 import { getAddress } from "./Ulti/getAddress";
-
+import { getWayPointsArray } from "./Ulti/getWayPointsArray";
 // router: new L.Routing.OSRMv1({
 //   serviceUrl: "//router.project-osrm.org/viaroute",
 // }),
@@ -82,10 +82,7 @@ export const createMarker = setPoints => {
       })
       .on("dragend", () => {
         getAddress(wps.latLng.lat, wps.latLng.lng).then(res => {
-          const waypoints = control
-            .getPlan()
-            .getWaypoints()
-            .map(wp => [wp.latLng.lat, wp.latLng.lng]);
+          const waypoints = getWayPointsArray(control);
           console.log(waypoints);
           setPoints(waypoints);
           console.log(res);

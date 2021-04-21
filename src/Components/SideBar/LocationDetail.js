@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { getAddress } from "../../Ulti/getAddress";
-const LocationDetail = ({ latlng, map }) => {
-  //  console.log(latlng, name);
+const LocationDetail = ({ point, map }) => {
+  //  console.log(point, name);
   const [name, setName] = useState("");
   useEffect(() => {
     let isCancelled = false;
-    if (!latlng) return;
+    if (!point) return;
     console.log("useEffect run");
-    getAddress(latlng[0], latlng[1]).then(res => {
+    // if (name) return;
+    getAddress(point[0], point[1]).then(res => {
       if (!isCancelled) {
         if (!res) {
           setName("Không có mạng !!");
@@ -20,13 +21,13 @@ const LocationDetail = ({ latlng, map }) => {
     return () => {
       isCancelled = true;
     };
-  }, [latlng]);
-  return latlng ? (
+  }, [point]);
+  return point ? (
     <div
       className="detail-location"
-      onClick={() => map.flyTo(latlng, map.getZoom())}
+      onClick={() => map.flyTo(point, map.getZoom())}
     >
-      <div className="detail-address">{name}</div>
+      <h3 className="detail-address">{name}</h3>
     </div>
   ) : null;
 };

@@ -2,6 +2,7 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import React from "react";
 
 function MapSetUp({ center, zoom, scrollWheelZoom, whenCreated, children }) {
+  console.log("Map render");
   return (
     <>
       <MapContainer
