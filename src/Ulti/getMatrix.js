@@ -25,7 +25,7 @@ export const getMatrix = (points, length = points.length) => {
     for (let j = i + 1; j < length; j++) {
       //  console.log(i, j);
       pairPoints[k++] = [i, j];
-      const x = k - 1;
+      // const x = k - 1;
       // console.log(pairPoints[x]);
     }
   }
@@ -34,7 +34,7 @@ export const getMatrix = (points, length = points.length) => {
   const matrix = new Array(length).fill(0).map(() => new Array(length).fill(0));
   for (let i = 0; i < length; i++) {
     for (let j = 0; j < i; j++) {
-      if (i == j) matrix[i][j] = 0;
+      if (i === j) matrix[i][j] = 0;
       else {
         matrix[i][j] = getDistance(
           points[pairPoints[l][0]],

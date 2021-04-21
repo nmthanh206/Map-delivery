@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 
 import MyLocation from "./Components/MyLocation";
@@ -11,20 +11,21 @@ import AddClickEventMap from "./Components/AddClickEventMap";
 import { createMarker } from "./Map";
 import { popupFormat } from "./Components/Search/SearchCenter";
 import { getWayPointsArray } from "./Ulti/getWayPointsArray";
-const ps = [
-  [10.841172501968856, 106.75928732628947],
-  [10.847944564456817, 106.76160644370741],
-  [10.847944364456817, 106.76160644370741],
-  [10.847944562456817, 106.76160644370741],
-  [10.827944564456817, 106.76150644370741],
-];
+import MapSetUp from "./Components/Map/MapSetUp";
+// const ps = [
+//   [10.841172501968856, 106.75928732628947],
+//   [10.847944564456817, 106.76160644370741],
+//   [10.847944364456817, 106.76160644370741],
+//   [10.847944562456817, 106.76160644370741],
+//   [10.827944564456817, 106.76150644370741],
+// ];
 
-const costMatrix = [
-  [0, 1, 3, 4],
-  [1, 0, 2, 3],
-  [3, 2, 0, 5],
-  [4, 3, 5, 0],
-];
+// const costMatrix = [
+//   [0, 1, 3, 4],
+//   [1, 0, 2, 3],
+//   [3, 2, 0, 5],
+//   [4, 3, 5, 0],
+// ];
 
 const wp = control
   .getPlan()
@@ -73,8 +74,7 @@ function App() {
         Clear Points
       </button>
       <div className="map-bar">
-        {/* <SideBar /> */}
-        <MapContainer
+        {/* <MapContainer
           center={position}
           zoom={13}
           scrollWheelZoom={true}
@@ -86,7 +86,16 @@ function App() {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
           />
-        </MapContainer>
+        </MapContainer> */}
+        <MapSetUp
+          center={position}
+          zoom={13}
+          scrollWheelZoom={true}
+          whenCreated={setUpMap}
+        >
+          <MyLocation setPoints={setPoints} />
+          <AddClickEventMap points={points} setPoints={setPoints} />
+        </MapSetUp>
         <SideBar points={points} map={map} />
       </div>
     </>

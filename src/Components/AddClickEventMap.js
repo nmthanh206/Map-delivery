@@ -2,7 +2,8 @@ import { useMapEvents } from "react-leaflet";
 import { control } from "../Map";
 const AddClickEventMap = ({ points, setPoints }) => {
   console.log("EventClick render !!");
-  const map = useMapEvents({
+  // const map = useMapEvents({})
+  useMapEvents({
     click(e) {
       const wps = control
         .getPlan()
