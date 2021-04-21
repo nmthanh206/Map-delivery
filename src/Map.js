@@ -35,13 +35,20 @@ export const control = L.Routing.control({
   const distance = e.routes[0].summary.totalDistance;
   console.log("routing distance: " + distance);
 });
-
+// const customIcon = {
+//   iconUrl: "myIcon.png",
+//   iconSize: [38, 95],
+//   iconAnchor: [22, 94],
+//   popupAnchor: [-3, -76],
+//   shadowSize: [68, 95],
+//   shadowAnchor: [22, 94],
+// };
 export const createMarker = setPoints => {
   return (index, wps, n) => {
     const marker = L.marker(wps.latLng, {
       draggable: true,
       bounceOnAdd: true,
-      // icon: L.icon({ iconUrl: "./my-icon.png", iconSize: [38, 95] }),
+      // icon: L.icon(customIcon),
       bounceOnAddOptions: {
         duration: 1000,
         height: 800,

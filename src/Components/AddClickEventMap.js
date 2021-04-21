@@ -3,8 +3,9 @@ import { control } from "../Map";
 const AddClickEventMap = ({ points, setPoints }) => {
   console.log("EventClick render !!");
   // const map = useMapEvents({})
-  useMapEvents({
+  const map = useMapEvents({
     click(e) {
+      // if (points.length < 3) map.locate();
       const wps = control
         .getPlan()
         .getWaypoints()
