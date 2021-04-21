@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { getAddress } from "../../Ulti/getAddress";
+import { address } from "../../Ulti/address";
 const LocationDetail = ({ point, map }) => {
   //  console.log(point, name);
-  const [name, setName] = useState("");
+  const add = address.data.find(
+    add => JSON.stringify(add.point) === JSON.stringify(point)
+  );
+  console.log("NAME NE", add);
+  const [name, setName] = useState(add ? add.name : "");
   useEffect(() => {
+    if (name) return;
     let isCancelled = false;
     if (!point) return;
     console.log("useEffect run");
@@ -16,6 +22,10 @@ const LocationDetail = ({ point, map }) => {
         }
         console.log(res.data);
         setName(res.data.display_name);
+        address.data = [
+          ...address.data,
+          { point: point, add: res.data.display_name },
+        ];
         console.log("Run Run run ");
       }
     });
