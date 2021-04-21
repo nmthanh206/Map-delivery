@@ -82,7 +82,7 @@ h4 {
   /* flex: 1; */
   padding: 1.2rem 1.2rem;
   background-color: rgb(112, 207, 193);
-  transition: background-color 0, 7s;
+  transition: background-color 0.25s;
   border: solid 0.1rem rgb(156, 211, 203);
   border-radius: 2rem;
 }

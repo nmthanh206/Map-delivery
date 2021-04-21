@@ -16,6 +16,7 @@ const LocationDetail = ({ point, map }) => {
         }
         console.log(res.data);
         setName(res.data.display_name);
+        console.log("Run Run run ");
       }
     });
     return () => {

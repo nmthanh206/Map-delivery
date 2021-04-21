@@ -3,6 +3,7 @@ import "leaflet-routing-machine";
 import "lrm-google";
 import { getAddress } from "./Ulti/getAddress";
 import { getWayPointsArray } from "./Ulti/getWayPointsArray";
+// import logo from "./location.jpg";
 // router: new L.Routing.OSRMv1({
 //   serviceUrl: "//router.project-osrm.org/viaroute",
 // }),
@@ -15,7 +16,7 @@ export const control = L.Routing.control({
   ],
   show: false,
   showAlternatives: true,
-  addWaypoints: true,
+  // addWaypoints: true,
   // routeDragTimeout: 250,
   routeWhileDragging: false,
   autoRoute: false,
@@ -36,7 +37,7 @@ export const control = L.Routing.control({
   console.log("routing distance: " + distance);
 });
 // const customIcon = {
-//   iconUrl: "myIcon.png",
+//   iconUrl: logo,
 //   iconSize: [38, 95],
 //   iconAnchor: [22, 94],
 //   popupAnchor: [-3, -76],

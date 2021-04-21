@@ -21,4 +21,4 @@ function MapSetUp({ center, zoom, scrollWheelZoom, whenCreated, children }) {
   );
 }
 
-export default React.memo(MapSetUp);
+export default MapSetUp;
