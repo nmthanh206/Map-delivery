@@ -4,7 +4,7 @@ import "./Sidebar.css";
 import { SolveSTP2 } from "../../Ulti/solveSTP2";
 import { v4 as uuidv4 } from "uuid";
 let method = "cycling";
-const SideBar = ({ points, map, control, setPoints }) => {
+const SideBar = ({ points, map, control, setPoints, children }) => {
   const listLocationDetails = points.map((point, i) => {
     return point ? (
       <div key={uuidv4()} className="container-box">
@@ -15,36 +15,39 @@ const SideBar = ({ points, map, control, setPoints }) => {
   });
   console.log(listLocationDetails);
   return (
-    <div className="SupportToolsArea">
-      <form>
-        <h4 style={{ margin: "2rem auto", display: "inline-block" }}>
-          LOCATION IN JOURNEY:
-        </h4>
-        <div className="box"> {listLocationDetails}</div>
-        {/* <input  type="button" value="START" id="Start" className="button" /> */}
-        <div className="slidebar-container">
-          <button
-            onClick={e => {
-              e.preventDefault();
-              SolveSTP2(control, setPoints, method);
-            }}
-            className="btn btn-find"
-          >
-            Find Route
-          </button>
-          <button
-            onClick={e => {
-              e.preventDefault();
-              control.hide();
-              control.getPlan().setWaypoints([null]);
-              setPoints([]);
-            }}
-            className="btn btn-clear"
-          >
-            Clear Points
-          </button>
-        </div>
-        {/* <div>
+    <>
+      {children}
+      <div className="SupportToolsArea">
+        <form>
+          <h4 style={{ margin: "2rem auto", display: "inline-block" }}>
+            LOCATION IN JOURNEY:
+          </h4>
+          <div className="box"> {listLocationDetails}</div>
+          {/* <input  type="button" value="START" id="Start" className="button" /> */}
+          <div className="slidebar-container">
+            <button
+              onClick={e => {
+                e.preventDefault();
+                SolveSTP2(control, setPoints, method);
+              }}
+              className="btn btn-find"
+            >
+              Find Route
+            </button>
+            <button
+              onClick={e => {
+                e.preventDefault();
+                control.hide();
+                control.getPlan().setWaypoints([null]);
+                setPoints([]);
+              }}
+              className="btn btn-clear"
+            >
+              Clear Points
+            </button>
+          </div>
+
+          {/* <div>
           <button
             onClick={e => {
               e.preventDefault();
@@ -73,8 +76,9 @@ const SideBar = ({ points, map, control, setPoints }) => {
             Driving
           </button>
         </div> */}
-      </form>
-    </div>
+        </form>
+      </div>
+    </>
   );
 };
 

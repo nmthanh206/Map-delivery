@@ -86,13 +86,27 @@ code {
   justify-content: center;
 }
 
-.toggle-btn {
-  position: absolute;
-  background-color: transparent;
+/* .toggle-btn 
+{
+   position: absolute; 
+  background-color: red;
   width: 32px;
   height: 32px;
   right: 660px;
   top: 35px;
+  align-self: flex-start;
+  border-radius: 3px;
+  cursor: pointer;
+  z-index: 99999;
+} */
+.toggle-btn {
+  /* position: relative; */
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+  margin-left: -8rem;
+  margin-top: 3.5rem;
+  align-self: flex-start;
   border-radius: 3px;
   cursor: pointer;
   z-index: 99999;

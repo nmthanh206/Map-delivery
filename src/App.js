@@ -53,19 +53,6 @@ function App() {
   };
   return (
     <>
-      <div
-        className="toggle-btn"
-        onClick={() => {
-          if (flag) {
-            console.log(control.hide);
-            control.hide();
-            flag = false;
-          } else {
-            control.show();
-            flag = true;
-          }
-        }}
-      ></div>
       <div className="map-bar">
         <MapSetUp
           center={position}
@@ -81,7 +68,21 @@ function App() {
           map={map}
           control={control}
           setPoints={setPoints}
-        />
+        >
+          <div
+            className="toggle-btn"
+            onClick={() => {
+              if (flag) {
+                console.log(control.hide);
+                control.hide();
+                flag = false;
+              } else {
+                control.show();
+                flag = true;
+              }
+            }}
+          ></div>
+        </SideBar>
       </div>
     </>
   );
