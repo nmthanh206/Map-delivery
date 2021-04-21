@@ -28,6 +28,7 @@ const wp = control
   .getPlan()
   .getWaypoints()
   .map(({ latLng }) => [latLng.lat, latLng.lng]);
+let flag = true;
 function App() {
   const position = [10.841172501968856, 106.75928730628947];
   const [map, setMap] = useState(null);
@@ -52,6 +53,19 @@ function App() {
   };
   return (
     <>
+      <div
+        className="toggle-btn"
+        onClick={() => {
+          if (flag) {
+            console.log(control.hide);
+            control.hide();
+            flag = false;
+          } else {
+            control.show();
+            flag = true;
+          }
+        }}
+      ></div>
       <div className="map-bar">
         <MapSetUp
           center={position}

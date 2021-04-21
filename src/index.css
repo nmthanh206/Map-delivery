@@ -30,9 +30,9 @@ code {
   margin: 2.5rem;
   border-radius: 20px;
 }
-.leaflet-control-container .leaflet-routing-container-hide {
+/* .leaflet-control-container .leaflet-routing-container-hide {
   display: none;
-}
+} */
 
 /* .map-bar {
   display: flex;
@@ -84,4 +84,16 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.toggle-btn {
+  position: absolute;
+  background-color: transparent;
+  width: 32px;
+  height: 32px;
+  right: 660px;
+  top: 35px;
+  border-radius: 3px;
+  cursor: pointer;
+  z-index: 99999;
 }
