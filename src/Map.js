@@ -8,7 +8,7 @@ import { getWayPointsArray } from "./Ulti/getWayPointsArray";
 //   serviceUrl: "//router.project-osrm.org/viaroute",
 // }),
 
-//pk.eyJ1IjoiY3VsaSIsImEiOiJja25uZXU0ZDAweTdiMnZtb3M2NHQ5aTRyIn0.NRnVfIe8taalu9iDd4fGPw
+//pk.eyJ1IjoiY3V0cmUiLCJhIjoiY2tucGUwMXdvMDUyZzJvbW83eHRwbzhnMyJ9.oRDaQnKxG0jhXpa-MZ78lQ  nguoi khac
 export const control = L.Routing.control({
   waypoints: [
     L.latLng(10.841172501968856, 106.75928730628947),

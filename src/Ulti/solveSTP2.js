@@ -1,7 +1,7 @@
 import axios from "axios";
-const MY_TOKEN =
-  "pk.eyJ1IjoiY3VsaSIsImEiOiJja25uZXU0ZDAweTdiMnZtb3M2NHQ5aTRyIn0.NRnVfIe8taalu9iDd4fGPw";
 
+const MY_TOKEN =
+  "pk.eyJ1IjoiY3V0cmUiLCJhIjoiY2tucGUwMXdvMDUyZzJvbW83eHRwbzhnMyJ9.oRDaQnKxG0jhXpa-MZ78lQ";
 const permutator = inputArr => {
   let result = [];
 
