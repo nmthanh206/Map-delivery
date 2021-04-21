@@ -3,6 +3,7 @@ import LocationDetail from "./LocationDetail";
 import "./Sidebar.css";
 import { SolveSTP2 } from "../../Ulti/solveSTP2";
 import { v4 as uuidv4 } from "uuid";
+let method = "cycling";
 const SideBar = ({ points, map, control, setPoints }) => {
   const listLocationDetails = points.map((point, i) => {
     return point ? (
@@ -25,7 +26,7 @@ const SideBar = ({ points, map, control, setPoints }) => {
           <button
             onClick={e => {
               e.preventDefault();
-              SolveSTP2(control, setPoints);
+              SolveSTP2(control, setPoints, method);
             }}
             className="btn btn-find"
           >
@@ -43,6 +44,35 @@ const SideBar = ({ points, map, control, setPoints }) => {
             Clear Points
           </button>
         </div>
+        {/* <div>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              method = "walking";
+            }}
+            className="btn btn-method"
+          >
+            Walking
+          </button>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              method = "cycling";
+            }}
+            className="btn btn-method"
+          >
+            Cycling
+          </button>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              method = "driving";
+            }}
+            className="btn btn-method"
+          >
+            Driving
+          </button>
+        </div> */}
       </form>
     </div>
   );
