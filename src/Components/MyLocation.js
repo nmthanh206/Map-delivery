@@ -1,5 +1,6 @@
 import { useMapEvents } from "react-leaflet";
 import { control } from "../Map";
+
 const MyLocation = ({ setPoints }) => {
   const map = useMapEvents({
     locationfound(e) {

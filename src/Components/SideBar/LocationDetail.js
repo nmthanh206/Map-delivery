@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { getAddress } from "../../Ulti/getAddress";
 import { address } from "../../Ulti/address";
-const LocationDetail = ({ point, map }) => {
+const LocationDetail = ({ point, map, add }) => {
   //  console.log(point, name);
   // const add = address.data.find(
   //   add => JSON.stringify(add.point) === JSON.stringify(point)
   // );
   // console.log("NAME NE", add);
   // const [name, setName] = useState(add ? add.name : "");
-  const [name, setName] = useState("loaing...");
+  console.log("ADDDDDDDDDDDDD", add);
+  const [name, setName] = useState(add);
+  console.log("NAMWWW", name);
   console.log("LocationDetail Run");
   useEffect(() => {
-    // if (name) return;
+    console.log("NAME CO MA ", name);
+    if (name !== "") {
+      console.log("tra ve ne");
+      return;
+    }
     let isCancelled = false;
     if (!point) return;
     console.log("useEffect run");
@@ -23,11 +29,13 @@ const LocationDetail = ({ point, map }) => {
           return;
         }
         console.log(res.data);
-        setName(res.data.display_name);
         address.data = [
           ...address.data,
-          { point: point, add: res.data.display_name },
+          { po: point, add: res.data.display_name },
         ];
+        console.log(address);
+        setName(res.data.display_name);
+
         console.log("Run Run run ");
       }
     });
