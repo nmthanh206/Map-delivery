@@ -4,7 +4,7 @@ import { control } from "../Map";
 const MyLocation = ({ setPoints }) => {
   const map = useMapEvents({
     locationfound(e) {
-      console.count("Chay");
+      console.count("Found Your Location ", e);
       control.getPlan().setWaypoints([e.latlng]); //Co getPlan thì sẽ add vô map
       //   rounting.addTo(map);      Tim Duong
       map.flyTo(e.latlng, map.getZoom());

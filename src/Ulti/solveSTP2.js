@@ -121,7 +121,7 @@ export const SolveSTP2 = async (control, setPoints, method) => {
       const url = `https://api.mapbox.com/directions-matrix/v1/mapbox/${method}/${points}?annotations=distance&access_token=${MY_TOKEN}`;
       console.log(url);
       const solution = await axios.get(url);
-      console.log(solution.data.distances);
+      console.log("MATRIX:  ", solution.data.distances);
       // return;
       // const costMatrix = getMatrix(pointsArray);
       const costMatrix = solution.data.distances;
@@ -131,7 +131,7 @@ export const SolveSTP2 = async (control, setPoints, method) => {
       const result2 = permutator(
         Array.from({ length: pointsArray.length - 1 }, (_, i) => i + 1) //- 1 o day
       ).map(path => [0, ...path]); //them 0 dau o day path => [0, ...path]
-      console.log(result2);
+      console.log("Hoan Vi :", result2);
       let min = Infinity;
       let index = 0;
       let pathCost = 0;
@@ -158,10 +158,10 @@ export const SolveSTP2 = async (control, setPoints, method) => {
         console.log(oldwp[result2[index][i]]);
         newwp[i] = oldwp[result2[index][i]];
       }
-      console.log("toa do moi", newwp);
+      // console.log("toa do moi", newwp);
       control.getPlan().setWaypoints(newwp);
       setPoints(newwp);
-      console.log(setPoints);
+      // console.log(setPoints);
       control.show(); //show chi duong chi tiet
       control.route();
       console.log(control.getRouter());

@@ -63,12 +63,7 @@ function App() {
           <MyLocation setPoints={setPoints} />
           <AddClickEventMap points={points} setPoints={setPoints} />
         </MapSetUp>
-        <SideBar
-          points={points}
-          map={map}
-          control={control}
-          setPoints={setPoints}
-        >
+        <SideBar points={points} map={map} setPoints={setPoints}>
           <div
             className="toggle-btn"
             onClick={() => {
