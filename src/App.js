@@ -68,7 +68,7 @@ function App() {
             className="toggle-btn"
             onClick={() => {
               if (flag) {
-                console.log(control.hide);
+                // console.log(control.hide);
                 control.hide();
                 flag = false;
               } else {
