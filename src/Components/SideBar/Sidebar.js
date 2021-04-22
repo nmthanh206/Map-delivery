@@ -13,7 +13,8 @@ const SideBar = ({ points, map, control, setPoints, children }) => {
       </div>
     ) : null;
   });
-  console.log(listLocationDetails);
+  console.log("SlideBar Run");
+  // console.log(listLocationDetails);
   return (
     <>
       {children}

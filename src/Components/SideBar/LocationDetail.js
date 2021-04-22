@@ -3,13 +3,15 @@ import { getAddress } from "../../Ulti/getAddress";
 import { address } from "../../Ulti/address";
 const LocationDetail = ({ point, map }) => {
   //  console.log(point, name);
-  const add = address.data.find(
-    add => JSON.stringify(add.point) === JSON.stringify(point)
-  );
-  console.log("NAME NE", add);
-  const [name, setName] = useState(add ? add.name : "");
+  // const add = address.data.find(
+  //   add => JSON.stringify(add.point) === JSON.stringify(point)
+  // );
+  // console.log("NAME NE", add);
+  // const [name, setName] = useState(add ? add.name : "");
+  const [name, setName] = useState("loaing...");
+  console.log("LocationDetail Run");
   useEffect(() => {
-    if (name) return;
+    // if (name) return;
     let isCancelled = false;
     if (!point) return;
     console.log("useEffect run");
