@@ -10,6 +10,7 @@ import { createMarker } from "./Map";
 import { popupFormat } from "./Components/Search/SearchCenter";
 import { getWayPointsArray } from "./Ulti/getWayPointsArray";
 import MapSetUp from "./Components/Map/MapSetUp";
+import axios from "axios";
 // const ps = [
 //   [10.841172501968856, 106.75928732628947],
 //   [10.847944564456817, 106.76160644370741],
@@ -54,9 +55,15 @@ function App(props) {
     control.getPlan().options.createMarker = createMarker(setPoints);
     map.locate();
   };
-
+  const onSave = e => {
+    e.preventDefault();
+    alert("ok save");
+  };
   return (
     <>
+      <button className="btn-save" onClick={onSave}>
+        SAVE
+      </button>
       <div className="map-bar">
         <MapSetUp
           center={position}

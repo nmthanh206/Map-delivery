@@ -115,3 +115,22 @@ code {
   width: 30rem !important;
   left: -8rem;
 }
+
+.btn-save {
+  position: absolute;
+  left: 30%;
+  transform: translateX(50%);
+  font-size: 1.5rem;
+  z-index: 9999;
+  background-color: chartreuse;
+  transition: all 0.25s;
+}
+.btn-save:hover {
+  position: absolute;
+  left: 30%;
+  transform: translateX(50%);
+  font-size: 1.5rem;
+  z-index: 9999;
+  background-color: rgb(114, 192, 37);
+  transition: all 0.25s;
+}
