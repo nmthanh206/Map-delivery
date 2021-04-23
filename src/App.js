@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import MyLocation from "./Components/MyLocation";
 import { control } from "./Map";
 import SideBar from "./Components/SideBar/Sidebar";
@@ -54,12 +54,7 @@ function App(props) {
     control.getPlan().options.createMarker = createMarker(setPoints);
     map.locate();
   };
-  useEffect(() => {
-    axios.get();
-    return () => {
-      cleanup;
-    };
-  }, [input]);
+
   return (
     <>
       <div className="map-bar">
