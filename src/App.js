@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 // import axios from "axios";
 import MyLocation from "./Components/MyLocation";
-import { control } from "./Map";
+import { control, createMarker } from "./Map";
 import SideBar from "./Components/SideBar/Sidebar";
 import searchBarLeft from "./Components/Search/SearchLeft";
 import searchBarCenter from "./Components/Search/SearchCenter.js";
 import AddClickEventMap from "./Components/AddClickEventMap";
-import { createMarker } from "./Map";
+// import { createMarker } from "./Map";
 import { popupFormat } from "./Components/Search/SearchCenter";
 import { getWayPointsArray } from "./Ulti/getWayPointsArray";
 import MapSetUp from "./Components/Map/MapSetUp";

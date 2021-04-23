@@ -16,7 +16,7 @@ const SideBar = ({ points, map, setPoints, children }) => {
     });
     return point ? (
       <div key={uuidv4()} className="container-box">
-        <h1>{i}</h1>
+        <h1>{i + 1}</h1>
         <LocationDetail
           map={map}
           point={point}
