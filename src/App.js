@@ -29,7 +29,9 @@ const wp = control
   .getWaypoints()
   .map(({ latLng }) => [latLng.lat, latLng.lng]);
 let flag = true;
-function App() {
+function App(props) {
+  console.log("PATH NAME NE", +window.location.search.slice(4));
+
   const position = [10.841172501968856, 106.75928730628947];
   const [map, setMap] = useState(null);
   const [points, setPoints] = useState(wp);
