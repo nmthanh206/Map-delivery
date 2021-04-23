@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import MyLocation from "./Components/MyLocation";
 import { control } from "./Map";
 import SideBar from "./Components/SideBar/Sidebar";
@@ -23,7 +24,7 @@ import MapSetUp from "./Components/Map/MapSetUp";
 //   [3, 2, 0, 5],
 //   [4, 3, 5, 0],
 // ];
-
+// "start": "set PORT=3006 && react-scripts start"
 const wp = control
   .getPlan()
   .getWaypoints()
@@ -53,6 +54,12 @@ function App(props) {
     control.getPlan().options.createMarker = createMarker(setPoints);
     map.locate();
   };
+  useEffect(() => {
+    axios.get();
+    return () => {
+      cleanup;
+    };
+  }, [input]);
   return (
     <>
       <div className="map-bar">
