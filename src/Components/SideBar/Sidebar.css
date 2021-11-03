@@ -1,0 +1,122 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.SupportToolsArea {
+  background-image: linear-gradient(to bottom right, #b9bbb8, #ebeeeb);
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  text-align: center;
+  width: 30vw;
+  height: calc(100vh - 5rem);
+  margin-right: 3rem;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+
+h4 {
+  text-align: left;
+  margin-left: 1em;
+  margin-top: 2em;
+  color: white;
+}
+
+#Location {
+  margin-top: 0.2em;
+  width: 90%;
+  font-size: 1.2em;
+}
+
+#Save {
+  margin-top: 2em;
+  width: 40%;
+  height: 2em;
+  border-radius: 20px;
+}
+
+.button:hover {
+  background-color: greenyellow;
+  cursor: pointer;
+}
+
+/* #Start {
+  margin: 1em;
+  margin-top: 2.5em;
+  width: 90%;
+  height: 1.5em;
+} */
+
+#Inputed {
+  display: block;
+  margin: 1em;
+  width: 90%;
+  height: 50vh;
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* .SupportToolsArea .button {
+  display: inline;
+  margin: 0 auto;
+  width: 100px;
+} */
+
+.SupportToolsArea .btn {
+  display: block;
+  /* flex: 1; */
+  padding: 1.2rem 1.2rem;
+  background-color: rgb(112, 207, 193);
+  transition: background-color 0.25s;
+  border: solid 0.1rem rgb(156, 211, 203);
+  border-radius: 2rem;
+}
+
+.SupportToolsArea .btn:hover {
+  background-color: rgb(19, 223, 29);
+}
+.slidebar-container {
+  display: flex;
+  justify-content: space-around;
+}
+.container-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 8rem;
+}
+.container-box h1 {
+  margin-left: 2rem;
+}
+.radio-btn {
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 3rem auto 0 auto;
+  width: 100%;
+  text-transform: uppercase;
+}
+.radio-btn label {
+  display: block;
+  margin-left: 1rem;
+  font-weight: 500;
+  background-color: rgb(243, 243, 243);
+  border-radius: 1rem;
+  padding: 0.7rem 1.4rem;
+}

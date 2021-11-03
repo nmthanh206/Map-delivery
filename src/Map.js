@@ -1,22 +1,30 @@
-import React from "react";
 import L from "leaflet";
 import "leaflet-routing-machine";
 import "lrm-google";
 import { getAddress } from "./Ulti/getAddress";
-
+import { getWayPointsArray } from "./Ulti/getWayPointsArray";
+// import logo from "./location.jpg";
 // router: new L.Routing.OSRMv1({
 //   serviceUrl: "//router.project-osrm.org/viaroute",
 // }),
 
+//pk.eyJ1IjoiY3V0cmUiLCJhIjoiY2tucGUwMXdvMDUyZzJvbW83eHRwbzhnMyJ9.oRDaQnKxG0jhXpa-MZ78lQ  nguoi khac
 export const control = L.Routing.control({
   waypoints: [
     L.latLng(10.841172501968856, 106.75928730628947),
     L.latLng(10.847944564456817, 106.76160644370741),
   ],
   show: false,
-  routeWhileDragging: true,
   showAlternatives: true,
-
+  // addWaypoints: true,
+  // routeDragTimeout: 250,
+  routeWhileDragging: false,
+  autoRoute: false,
+  useZoomParameter: false,
+  allowUTurns: false,
+  // lineOptions: {
+  //   styles: [{ className: "animate" }], // Adding animate class
+  // },
   altLineOptions: {
     styles: [
       { color: "black", opacity: 0.15, weight: 9 },
@@ -24,19 +32,30 @@ export const control = L.Routing.control({
       { color: "blue", opacity: 0.5, weight: 2 },
     ],
   },
-  autoRoute: false,
-  createMarker: function (index, wps, n) {
-    // console.log(wps);
+}).on("routesfound", function (e) {
+  const distance = e.routes[0].summary.totalDistance;
+  console.log("routing distance: " + distance);
+});
+// const customIcon = {
+//   iconUrl: logo,
+//   iconSize: [38, 95],
+//   iconAnchor: [22, 94],
+//   popupAnchor: [-3, -76],
+//   shadowSize: [68, 95],
+//   shadowAnchor: [22, 94],
+// };
+export const createMarker = setPoints => {
+  return (index, wps, n) => {
     const marker = L.marker(wps.latLng, {
       draggable: true,
       bounceOnAdd: true,
+      // icon: L.icon(customIcon),
       bounceOnAddOptions: {
         duration: 1000,
         height: 800,
       },
     })
       .bindPopup(() => {
-        if (!marker.getPopup()) return marker.getPopup();
         getAddress(wps.latLng.lat, wps.latLng.lng).then(res => {
           console.log(res);
           marker.bindPopup(res.data.display_name);
@@ -45,6 +64,7 @@ export const control = L.Routing.control({
       })
       .openPopup()
       .on("contextmenu", e => {
+        console.log("contextmenu");
         const waypoints = control
           .getPlan()
           .getWaypoints()
@@ -53,12 +73,24 @@ export const control = L.Routing.control({
           wp => JSON.stringify(wp) !== JSON.stringify(e.latlng)
         );
         control.getPlan().setWaypoints(newWaypoints);
-        //  control.spliceWaypoints(index, index + 1);
+        if (!newWaypoints[0]) {
+          setPoints([...newWaypoints]);
+          return;
+        }
+        console.log(newWaypoints);
+        const newWpArray = newWaypoints.map(wp => [wp.lat, wp.lng]);
+        setPoints([...newWpArray]);
+      })
+      .on("dragend", () => {
+        getAddress(wps.latLng.lat, wps.latLng.lng).then(res => {
+          const waypoints = getWayPointsArray(control);
+          console.log(waypoints);
+          setPoints(waypoints);
+          console.log(res);
+          marker.bindPopup(res.data.display_name);
+        });
       });
 
     return marker;
-  },
-}).on("routesfound", function (e) {
-  const distance = e.routes[0].summary.totalDistance;
-  console.log("routing distance: " + distance);
-});
+  };
+};

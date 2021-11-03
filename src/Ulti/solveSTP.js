@@ -58,3 +58,4 @@ export async function solveSTP(points, control, map) {
     console.error(error);
   }
 }
+//  https://api.mapbox.com/directions-matrix/v1/mapbox/driving/106.76094174385072,10.843147966814454;106.76065206527711,10.845592606229866;106.75966501235962,10.845023597115608?approaches=curb;curb;curb&access_token=pk.eyJ1IjoiY3VsaSIsImEiOiJja25uZXU0ZDAweTdiMnZtb3M2NHQ5aTRyIn0.NRnVfIe8taalu9iDd4fGPw
